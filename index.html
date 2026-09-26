@@ -304,6 +304,11 @@ button{
     color:#a5b4fc;
 }
 
+.version{
+    text-align:center;
+    margin-top:15px;
+}
+
 @media(max-width:600px){
 
     .screen{
@@ -324,7 +329,6 @@ button{
 </head>
 
 <body>
-
 
 <!-- ================= LOGIN ================= -->
 
@@ -437,9 +441,7 @@ class="secondary"
 Select one or more areas you want DigitalBalance AI to analyse.
 </p>
 
-
 <div class="goal-grid">
-
 
 <div
 class="goal"
@@ -520,7 +522,6 @@ Analyse notifications and distractions.
 
 </div>
 
-
 </div>
 
 
@@ -555,19 +556,23 @@ class="secondary"
 </button>
 
 <button
+id="whatIfButton"
 class="secondary"
-onclick="alert('What-If Lab will be added next.')"
 >
 🧪 What-If Lab
 </button>
 
 <button
+id="chatbotButton"
 class="secondary"
-onclick="alert('AI Chatbot will be added next.')"
 >
 💬 Ask DigitalBalance AI
 </button>
 
+</div>
+
+<div class="version small">
+DigitalBalance AI • Smart Question System v2
 </div>
 
 </div>
@@ -601,7 +606,7 @@ Exit
 id="questionNumber"
 class="question-number"
 >
-Question 1
+Question 1 of 8
 </div>
 
 
@@ -724,7 +729,6 @@ style="text-align:center;"
 
 <div class="stats">
 
-
 <div class="stat">
 
 <div class="small">
@@ -755,7 +759,6 @@ class="stat-number"
 </div>
 
 </div>
-
 
 </div>
 
@@ -836,9 +839,7 @@ Clear History
 </section>
 
 
-
 <script>
-
 
 /* =====================================================
    VARIABLES
@@ -860,7 +861,6 @@ let answers = {};
 ===================================================== */
 
 const questionBank = {
-
 
 screen: [
 
@@ -1310,8 +1310,7 @@ screen.classList.remove("active");
 
 });
 
-const target =
-document.getElementById(id);
+const target = document.getElementById(id);
 
 if(target){
 
@@ -1336,7 +1335,6 @@ document.getElementById("username").value.trim();
 const password =
 document.getElementById("password").value.trim();
 
-
 if(username === "" || password === ""){
 
 alert("Please enter your username and password.");
@@ -1345,17 +1343,13 @@ return;
 
 }
 
-
 currentUsername = username;
-
 
 document.getElementById("welcomeGreeting").textContent =
 "Welcome, " + username + "! 👋";
 
-
 document.getElementById("dashboardGreeting").textContent =
 "Hi, " + username + " 👋";
-
 
 showScreen("welcomeScreen");
 
@@ -1368,9 +1362,7 @@ showScreen("welcomeScreen");
 
 function toggleGoal(element){
 
-const goal =
-element.dataset.goal;
-
+const goal = element.dataset.goal;
 
 if(element.classList.contains("selected")){
 
@@ -1391,7 +1383,6 @@ selectedGoals.push(goal);
 
 }
 
-
 document.getElementById("selectedText").textContent =
 selectedGoals.length + " goal(s) selected";
 
@@ -1399,7 +1390,34 @@ selectedGoals.length + " goal(s) selected";
 
 
 /* =====================================================
-   START QUESTIONS
+   SMART QUESTION LIMIT
+===================================================== */
+
+function getQuestionLimit(goalCount){
+
+if(goalCount === 1){
+return 8;
+}
+
+if(goalCount === 2){
+return 12;
+}
+
+if(goalCount === 3){
+return 15;
+}
+
+if(goalCount === 4){
+return 18;
+}
+
+return 20;
+
+}
+
+
+/* =====================================================
+   START SMART QUESTIONS
 ===================================================== */
 
 function startQuestions(){
@@ -1412,7 +1430,6 @@ return;
 
 }
 
-
 questions = [];
 
 answers = {};
@@ -1420,13 +1437,17 @@ answers = {};
 currentQuestion = 0;
 
 
-/* Remove duplicate questions */
+/*
+   We first remove duplicate question text.
+*/
 
-const seen =
-new Set();
-
+const goalQuestions = {};
 
 selectedGoals.forEach(function(goal){
+
+goalQuestions[goal] = [];
+
+const seen = new Set();
 
 questionBank[goal].forEach(function(question){
 
@@ -1434,11 +1455,13 @@ if(!seen.has(question.text)){
 
 seen.add(question.text);
 
-questions.push({
+goalQuestions[goal].push({
 
 text:question.text,
 
-options:[...question.options]
+options:[...question.options],
+
+goal:goal
 
 });
 
@@ -1448,6 +1471,69 @@ options:[...question.options]
 
 });
 
+
+/*
+   Smart distribution:
+   Questions are selected fairly from every chosen goal.
+*/
+
+const target = getQuestionLimit(selectedGoals.length);
+
+let indexes = {};
+
+selectedGoals.forEach(function(goal){
+
+indexes[goal] = 0;
+
+});
+
+
+/*
+   Round-robin selection.
+   This makes sure every selected goal gets represented.
+*/
+
+while(
+questions.length < target
+){
+
+let addedThisRound = false;
+
+for(let i = 0; i < selectedGoals.length; i++){
+
+const goal = selectedGoals[i];
+
+const index = indexes[goal];
+
+if(
+index < goalQuestions[goal].length &&
+questions.length < target
+){
+
+questions.push(
+goalQuestions[goal][index]
+);
+
+indexes[goal]++;
+
+addedThisRound = true;
+
+}
+
+}
+
+if(!addedThisRound){
+
+break;
+
+}
+
+}
+
+
+/*
+   Final safety check.
+*/
 
 if(questions.length === 0){
 
@@ -1456,6 +1542,18 @@ alert("No questions are available.");
 return;
 
 }
+
+
+/*
+   Shuffle questions slightly so the same goal
+   does not always appear in one block.
+*/
+
+questions.sort(function(){
+
+return Math.random() - 0.5;
+
+});
 
 
 showScreen("questionScreen");
@@ -1471,9 +1569,7 @@ renderQuestion();
 
 function renderQuestion(){
 
-const q =
-questions[currentQuestion];
-
+const q = questions[currentQuestion];
 
 document.getElementById("questionNumber").textContent =
 "Question " +
@@ -1481,14 +1577,11 @@ document.getElementById("questionNumber").textContent =
 " of " +
 questions.length;
 
-
 document.getElementById("questionText").textContent =
 q.text;
 
-
 const container =
 document.getElementById("optionsContainer");
-
 
 container.innerHTML = "";
 
@@ -1498,14 +1591,9 @@ q.options.forEach(function(optionText){
 const option =
 document.createElement("div");
 
+option.className = "option";
 
-option.className =
-"option";
-
-
-option.textContent =
-optionText;
-
+option.textContent = optionText;
 
 option.addEventListener(
 "click",
@@ -1519,9 +1607,7 @@ item.classList.remove("selected");
 
 });
 
-
 option.classList.add("selected");
-
 
 answers[currentQuestion] =
 optionText;
@@ -1529,13 +1615,14 @@ optionText;
 }
 );
 
-
 container.appendChild(option);
 
 });
 
 
-/* Restore answer */
+/*
+   Restore answer if user goes back.
+*/
 
 if(answers[currentQuestion]){
 
@@ -1557,18 +1644,21 @@ option.classList.add("selected");
 }
 
 
-/* Progress */
+/*
+   Progress bar.
+*/
 
 const progress =
 ((currentQuestion + 1) /
 questions.length) * 100;
 
-
 document.getElementById("questionProgress").style.width =
 progress + "%";
 
 
-/* Button */
+/*
+   Button text.
+*/
 
 if(
 currentQuestion === questions.length - 1
@@ -1630,13 +1720,9 @@ let total = 0;
 
 let count = 0;
 
-
 Object.values(answers).forEach(function(answer){
 
 count++;
-
-
-/* Higher score = better digital balance */
 
 if(
 answer === "Never" ||
@@ -1646,7 +1732,9 @@ answer === "Very balanced" ||
 answer === "Almost always" ||
 answer === "Not at all" ||
 answer === "No" ||
-answer === "Not difficult"
+answer === "Not difficult" ||
+answer === "Almost none" ||
+answer === "Less than 15 minutes"
 ){
 
 total += 100;
@@ -1659,7 +1747,9 @@ answer === "Satisfied" ||
 answer === "Mostly balanced" ||
 answer === "Often" ||
 answer === "A little" ||
-answer === "Slightly difficult"
+answer === "Slightly difficult" ||
+answer === "Less than 1 hour" ||
+answer === "30 minutes–1 hour"
 ){
 
 total += 75;
@@ -1668,7 +1758,9 @@ total += 75;
 
 else if(
 answer === "Neutral" ||
-answer === "Sometimes"
+answer === "Once" ||
+answer === "1–2 hours" ||
+answer === "15–30 minutes"
 ){
 
 total += 60;
@@ -1678,7 +1770,9 @@ total += 60;
 else if(
 answer === "Quite a lot" ||
 answer === "Quite difficult" ||
-answer === "Somewhat unbalanced"
+answer === "Somewhat unbalanced" ||
+answer === "2–3 times" ||
+answer === "30–60 minutes"
 ){
 
 total += 40;
@@ -1700,7 +1794,6 @@ return 0;
 
 }
 
-
 return Math.round(total / count);
 
 }
@@ -1714,18 +1807,13 @@ function runAnalysis(){
 
 showScreen("analysisScreen");
 
-
 const progress =
 document.getElementById("analysisProgress");
-
 
 const message =
 document.getElementById("analysisMessage");
 
-
-progress.style.width =
-"0%";
-
+progress.style.width = "0%";
 
 message.textContent =
 "Analysing your answers...";
@@ -1733,8 +1821,7 @@ message.textContent =
 
 setTimeout(function(){
 
-progress.style.width =
-"25%";
+progress.style.width = "25%";
 
 message.textContent =
 "Processing your digital habits...";
@@ -1744,8 +1831,7 @@ message.textContent =
 
 setTimeout(function(){
 
-progress.style.width =
-"50%";
+progress.style.width = "50%";
 
 message.textContent =
 "Finding patterns in your responses...";
@@ -1755,8 +1841,7 @@ message.textContent =
 
 setTimeout(function(){
 
-progress.style.width =
-"75%";
+progress.style.width = "75%";
 
 message.textContent =
 "Calculating your digital balance indicator...";
@@ -1766,8 +1851,7 @@ message.textContent =
 
 setTimeout(function(){
 
-progress.style.width =
-"100%";
+progress.style.width = "100%";
 
 message.textContent =
 "Analysis complete!";
@@ -1775,33 +1859,24 @@ message.textContent =
 },1500);
 
 
-/* IMPORTANT:
-   Show result after analysis */
-
 setTimeout(function(){
 
 const score =
 calculateScore();
 
-
 document.getElementById("resultScore").textContent =
 score + "/100";
-
 
 document.getElementById("resultGoals").textContent =
 selectedGoals.length;
 
-
 document.getElementById("resultQuestions").textContent =
 questions.length;
-
 
 document.getElementById("resultText").textContent =
 "Your DigitalBalance AI analysis is complete. Your responses provide a snapshot of your current digital-use patterns. You can use this as a starting point for understanding your habits.";
 
-
 saveHistory();
-
 
 showScreen("resultScreen");
 
@@ -1831,7 +1906,6 @@ getHistoryKey()
 ) || "[]"
 );
 
-
 const record = {
 
 date:new Date().toLocaleDateString(),
@@ -1846,9 +1920,7 @@ score:calculateScore()
 
 };
 
-
 history.push(record);
-
 
 localStorage.setItem(
 getHistoryKey(),
@@ -1876,10 +1948,8 @@ getHistoryKey()
 ) || "[]"
 );
 
-
 const container =
 document.getElementById("historyList");
-
 
 container.innerHTML = "";
 
@@ -1902,10 +1972,8 @@ history
 const div =
 document.createElement("div");
 
-
 div.className =
 "history-item";
-
 
 div.innerHTML =
 
@@ -1927,7 +1995,6 @@ record.questions +
 record.score +
 "/100 indicator" +
 "</span>";
-
 
 container.appendChild(div);
 
@@ -1961,7 +2028,6 @@ function toggleTheme(){
 
 document.body.classList.toggle("dark");
 
-
 localStorage.setItem(
 
 "digitalBalanceTheme",
@@ -1982,6 +2048,28 @@ localStorage.getItem(
 ){
 
 document.body.classList.add("dark");
+
+}
+
+
+/* =====================================================
+   EXTRA TOOLS
+===================================================== */
+
+function openWhatIf(){
+
+alert(
+"What-If Lab is coming next. It will simulate how changing digital habits could affect your usage patterns."
+);
+
+}
+
+
+function openChatbot(){
+
+alert(
+"DigitalBalance AI Chatbot is coming next. It will provide personalised digital-balance tips."
+);
 
 }
 
@@ -2067,6 +2155,22 @@ document
 .addEventListener(
 "click",
 openHistory
+);
+
+
+document
+.getElementById("whatIfButton")
+.addEventListener(
+"click",
+openWhatIf
+);
+
+
+document
+.getElementById("chatbotButton")
+.addEventListener(
+"click",
+openChatbot
 );
 
 
