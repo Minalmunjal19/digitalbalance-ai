@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -49,6 +50,12 @@ body.dark{
     display:flex;
 }
 
+.container{
+    width:100%;
+    max-width:900px;
+    margin:auto;
+}
+
 .card{
     background:white;
     border-radius:22px;
@@ -62,21 +69,15 @@ body.dark{
     box-shadow:none;
 }
 
-.container{
-    width:100%;
-    max-width:900px;
-    margin:auto;
-}
-
 .logo{
-    font-size:34px;
+    font-size:32px;
     font-weight:700;
     margin-bottom:8px;
 }
 
 .subtitle{
     color:#687386;
-    margin-bottom:25px;
+    margin-bottom:22px;
 }
 
 .dark .subtitle{
@@ -122,7 +123,7 @@ button{
 
 .dark .secondary{
     background:#374151;
-    color:#fff;
+    color:white;
 }
 
 .header{
@@ -205,6 +206,12 @@ button{
     border-radius:14px;
     margin:10px 0;
     cursor:pointer;
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:#818cf8;
+    transform:translateX(2px);
 }
 
 .option.selected{
@@ -266,10 +273,6 @@ button{
     border-color:#374151;
 }
 
-.hidden{
-    display:none !important;
-}
-
 .small{
     font-size:13px;
     color:#687386;
@@ -279,7 +282,19 @@ button{
     color:#c5cad3;
 }
 
+.info-box{
+    background:#eef2ff;
+    padding:15px;
+    border-radius:14px;
+    margin-top:15px;
+}
+
+.dark .info-box{
+    background:#312e81;
+}
+
 @media(max-width:600px){
+
     .screen{
         padding:16px;
     }
@@ -291,42 +306,73 @@ button{
     .question{
         font-size:19px;
     }
+
+    .header{
+        align-items:flex-start;
+    }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
+<!-- ================= LOGIN ================= -->
+
 <section id="loginScreen" class="screen center-screen active">
+
 <div class="container">
+
 <div class="card">
 
-<div class="logo">📱 DigitalBalance AI</div>
+<div class="logo">
+📱 DigitalBalance AI
+</div>
 
 <p class="subtitle">
 Understand your digital life. Balance it better.
 </p>
 
-<input id="username" type="text" placeholder="Username">
+<input
+id="username"
+type="text"
+placeholder="Username"
+autocomplete="username"
+>
 
-<input id="password" type="password" placeholder="Password">
+<input
+id="password"
+type="password"
+placeholder="Password"
+autocomplete="current-password"
+>
 
-<button class="primary" onclick="login()">
-Login
+<button
+id="loginButton"
+class="primary"
+>
+Login →
 </button>
 
 </div>
+
 </div>
+
 </section>
 
 
-<!-- WELCOME -->
+<!-- ================= WELCOME ================= -->
+
 <section id="welcomeScreen" class="screen center-screen">
+
 <div class="container">
+
 <div class="card">
 
-<div class="logo">👋 Welcome!</div>
+<div class="logo">
+👋 Welcome!
+</div>
 
 <h2 id="welcomeGreeting"></h2>
 
@@ -334,27 +380,37 @@ Login
 Let's understand your digital habits.
 </p>
 
-<button class="primary" onclick="showScreen('dashboardScreen')">
-Continue to Dashboard
+<button
+id="welcomeButton"
+class="primary"
+>
+Continue to Dashboard →
 </button>
 
 </div>
+
 </div>
+
 </section>
 
 
-<!-- DASHBOARD -->
+<!-- ================= DASHBOARD ================= -->
+
 <section id="dashboardScreen" class="screen">
+
 <div class="container">
 
 <div class="header">
 
 <div>
 <h1>DigitalBalance AI</h1>
-<p class="small" id="dashboardGreeting"></p>
+<p id="dashboardGreeting" class="small"></p>
 </div>
 
-<button class="secondary" onclick="toggleTheme()">
+<button
+id="themeButton"
+class="secondary"
+>
 🌙 Theme
 </button>
 
@@ -369,46 +425,92 @@ Continue to Dashboard
 Select one or more areas you want DigitalBalance AI to analyse.
 </p>
 
+
 <div class="goal-grid">
 
-<div class="goal" data-goal="screen" onclick="toggleGoal(this)">
+
+<div class="goal" data-goal="screen">
+
 <div class="goal-icon">📱</div>
+
 <h3>Screen Time</h3>
-<p>Understand your daily screen usage.</p>
+
+<p>
+Understand your daily screen usage.
+</p>
+
 </div>
 
-<div class="goal" data-goal="balance" onclick="toggleGoal(this)">
+
+<div class="goal" data-goal="balance">
+
 <div class="goal-icon">⚖️</div>
+
 <h3>Digital Balance</h3>
-<p>Understand your overall digital habits.</p>
+
+<p>
+Understand your overall digital habits.
+</p>
+
 </div>
 
-<div class="goal" data-goal="study" onclick="toggleGoal(this)">
+
+<div class="goal" data-goal="study">
+
 <div class="goal-icon">📚</div>
+
 <h3>Study & Screen</h3>
-<p>Analyse study and entertainment screen use.</p>
+
+<p>
+Analyse study and entertainment screen use.
+</p>
+
 </div>
 
-<div class="goal" data-goal="night" onclick="toggleGoal(this)">
+
+<div class="goal" data-goal="night">
+
 <div class="goal-icon">🌙</div>
+
 <h3>Night Usage</h3>
-<p>Understand your late-night phone usage.</p>
+
+<p>
+Understand your late-night phone usage.
+</p>
+
 </div>
 
-<div class="goal" data-goal="distraction" onclick="toggleGoal(this)">
+
+<div class="goal" data-goal="distraction">
+
 <div class="goal-icon">🔔</div>
+
 <h3>Distraction Analyzer</h3>
-<p>Analyse notifications and distractions.</p>
-</div>
+
+<p>
+Analyse notifications and distractions.
+</p>
 
 </div>
 
-<p id="selectedText" class="small" style="margin-top:15px;">
+
+</div>
+
+
+<p
+id="selectedText"
+class="small"
+style="margin-top:15px;"
+>
 0 goals selected
 </p>
 
-<button class="primary" onclick="startQuestions()">
-Start Questions →
+
+<button
+id="startButton"
+class="primary"
+>
+Start Smart Questions →
 </button>
 
 </div>
@@ -418,241 +520,315 @@ Start Questions →
 
 <h2>🛠️ Tools</h2>
 
-<button class="secondary" onclick="openHistory()">
+<button
+id="historyButton"
+class="secondary"
+>
 🗂️ History
 </button>
 
-<button class="secondary" onclick="alert('Coming next!')">
+<button
+class="secondary"
+onclick="alert('What-If Lab will be added in the next development step.')"
+>
 🧪 What-If Lab
 </button>
 
-<button class="secondary" onclick="alert('Coming next!')">
+<button
+class="secondary"
+onclick="alert('AI Chatbot will be added in the next development step.')"
+>
 💬 Ask DigitalBalance AI
 </button>
 
 </div>
 
 </div>
+
 </section>
 
 
-<!-- QUESTIONS -->
+<!-- ================= QUESTIONS ================= -->
+
 <section id="questionScreen" class="screen">
+
 <div class="container">
 
 <div class="header">
+
 <h1>🧠 Smart Questions</h1>
 
-<button class="secondary" onclick="showScreen('dashboardScreen')">
+<button
+id="exitQuestionButton"
+class="secondary"
+>
 Exit
 </button>
+
 </div>
+
 
 <div class="card">
 
-<div class="question-number" id="questionNumber">
+<div
+id="questionNumber"
+class="question-number"
+>
 Question 1
 </div>
 
+
 <div class="progress-bar">
-<div id="questionProgress" class="progress-fill"></div>
+
+<div
+id="questionProgress"
+class="progress-fill"
+>
 </div>
 
-<div id="questionText" class="question">
-Question
 </div>
+
+
+<div
+id="questionText"
+class="question"
+>
+Loading question...
+</div>
+
 
 <div id="optionsContainer"></div>
 
-<button id="nextButton" class="primary" onclick="nextQuestion()">
+
+<button
+id="nextButton"
+class="primary"
+>
 Next →
 </button>
 
 </div>
 
 </div>
+
 </section>
 
 
-<!-- ANALYSIS -->
-<section id="analysisScreen" class="screen center-screen">
+<!-- ================= ANALYSIS ================= -->
+
+<section
+id="analysisScreen"
+class="screen center-screen"
+>
+
 <div class="container">
 
 <div class="card">
 
-<div class="logo">🔎 Analysing...</div>
+<div class="logo">
+🔎 Analysing...
+</div>
 
-<p class="subtitle" id="analysisMessage">
+<p
+id="analysisMessage"
+class="subtitle"
+>
 Finding patterns in your digital habits...
 </p>
 
 <div class="progress-bar">
-<div id="analysisProgress" class="progress-fill"></div>
+
+<div
+id="analysisProgress"
+class="progress-fill"
+>
 </div>
 
 </div>
 
 </div>
+
+</div>
+
 </section>
 
 
-<!-- RESULT -->
+<!-- ================= RESULT ================= -->
+
 <section id="resultScreen" class="screen">
+
 <div class="container">
 
 <div class="header">
 
 <div>
+
 <h1>📊 Your Analysis</h1>
-<p class="small">Your personalised digital habit summary</p>
+
+<p class="small">
+Your personalised digital habit summary
+</p>
+
 </div>
 
 </div>
+
 
 <div class="card">
 
-<h2 id="resultTitle">
+<h2>
 Analysis Complete 🎉
 </h2>
 
-<p id="resultText" class="subtitle"></p>
+<p
+id="resultText"
+class="subtitle"
+style="margin-top:12px;"
+>
+</p>
+
 
 <div class="stats">
 
-<div class="stat">
-<div class="small">Goals Analysed</div>
-<div class="stat-number" id="resultGoals">0</div>
-</div>
 
 <div class="stat">
-<div class="small">Questions Answered</div>
-<div class="stat-number" id="resultQuestions">0</div>
+
+<div class="small">
+Goals Analysed
+</div>
+
+<div
+id="resultGoals"
+class="stat-number"
+>
+0
 </div>
 
 </div>
 
-<p class="small" style="margin-top:20px;">
+
+<div class="stat">
+
+<div class="small">
+Questions Answered
+</div>
+
+<div
+id="resultQuestions"
+class="stat-number"
+>
+0
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="info-box">
+
+<strong>💡 What's next?</strong>
+
+<p
+class="small"
+style="margin-top:6px;"
+>
+Your answers can be used to generate personalised insights,
+patterns and graphs.
+</p>
+
+</div>
+
+
+<p
+class="small"
+style="margin-top:20px;"
+>
 This score is an app-generated indicator based on your entered
 digital-usage patterns. It is not a medical or psychological assessment.
 </p>
 
-<button class="primary" onclick="showScreen('dashboardScreen')">
+
+<button
+id="resultDashboardButton"
+class="primary"
+>
 Back to Dashboard
 </button>
 
 </div>
 
 </div>
+
 </section>
 
 
-<!-- HISTORY -->
+<!-- ================= HISTORY ================= -->
+
 <section id="historyScreen" class="screen">
+
 <div class="container">
 
 <div class="header">
 
 <h1>🗂️ History</h1>
 
-<button class="secondary" onclick="showScreen('dashboardScreen')">
+<button
+id="historyBackButton"
+class="secondary"
+>
 Back
 </button>
 
 </div>
 
+
 <div class="card">
 
 <div id="historyList"></div>
 
-<button class="secondary" onclick="clearHistory()">
+<button
+id="clearHistoryButton"
+class="secondary"
+>
 Clear History
 </button>
 
 </div>
 
 </div>
+
 </section>
+
 
 
 <script>
 
+/* =====================================================
+   DIGITALBALANCE AI
+   MAIN APPLICATION
+===================================================== */
+
+
+/* -----------------------------
+   GLOBAL VARIABLES
+----------------------------- */
+
 let currentUsername = "";
+
 let selectedGoals = [];
+
 let questions = [];
+
 let currentQuestion = 0;
+
 let answers = {};
 
 
-// ---------------- SCREEN CONTROL ----------------
-
-function showScreen(id){
-
-    document.querySelectorAll(".screen").forEach(function(screen){
-        screen.classList.remove("active");
-    });
-
-    document.getElementById(id).classList.add("active");
-
-    window.scrollTo(0,0);
-}
-
-
-// ---------------- LOGIN ----------------
-
-function login(){
-
-    const username =
-        document.getElementById("username").value.trim();
-
-    const password =
-        document.getElementById("password").value.trim();
-
-    if(username === "" || password === ""){
-
-        alert("Please enter your username and password.");
-
-        return;
-    }
-
-    currentUsername = username;
-
-    document.getElementById("welcomeGreeting").textContent =
-        "Welcome, " + username + "! 👋";
-
-    document.getElementById("dashboardGreeting").textContent =
-        "Hi, " + username + " 👋";
-
-    showScreen("welcomeScreen");
-}
-
-
-// ---------------- GOALS ----------------
-
-function toggleGoal(element){
-
-    const goal = element.dataset.goal;
-
-    element.classList.toggle("selected");
-
-    if(selectedGoals.includes(goal)){
-
-        selectedGoals =
-            selectedGoals.filter(function(item){
-                return item !== goal;
-            });
-
-    }else{
-
-        selectedGoals.push(goal);
-
-    }
-
-    document.getElementById("selectedText").textContent =
-        selectedGoals.length + " goal(s) selected";
-}
-
-
-// ---------------- QUESTION DATABASE ----------------
+/* -----------------------------
+   QUESTION DATABASE
+----------------------------- */
 
 const questionBank = {
 
@@ -702,7 +878,8 @@ options:[
 
 ],
 
-balance:[
+
+balance: [
 
 {
 text:"How satisfied are you with your current digital habits?",
@@ -733,11 +910,22 @@ options:[
 "Habit",
 "Nothing specific"
 ]
+},
+
+{
+text:"How difficult is it for you to put your phone away when needed?",
+options:[
+"Not difficult",
+"Slightly difficult",
+"Quite difficult",
+"Very difficult"
+]
 }
 
 ],
 
-study:[
+
+study: [
 
 {
 text:"How much screen time is usually related to study?",
@@ -781,7 +969,8 @@ options:[
 
 ],
 
-night:[
+
+night: [
 
 {
 text:"How often do you use your phone after your planned bedtime?",
@@ -826,7 +1015,8 @@ options:[
 
 ],
 
-distraction:[
+
+distraction: [
 
 {
 text:"How often do notifications interrupt you while studying?",
@@ -874,332 +1064,775 @@ options:[
 };
 
 
-// ---------------- BUILD QUESTIONS ----------------
+/* -----------------------------
+   SCREEN CONTROL
+----------------------------- */
+
+function showScreen(screenId){
+
+document.querySelectorAll(".screen").forEach(function(screen){
+
+screen.classList.remove("active");
+
+});
+
+const target = document.getElementById(screenId);
+
+if(target){
+
+target.classList.add("active");
+
+}
+
+window.scrollTo(0,0);
+
+}
+
+
+/* -----------------------------
+   LOGIN
+----------------------------- */
+
+function login(){
+
+const username =
+document.getElementById("username").value.trim();
+
+const password =
+document.getElementById("password").value.trim();
+
+
+if(username === "" || password === ""){
+
+alert("Please enter your username and password.");
+
+return;
+
+}
+
+
+currentUsername = username;
+
+
+document.getElementById("welcomeGreeting").textContent =
+"Welcome, " + username + "! 👋";
+
+
+document.getElementById("dashboardGreeting").textContent =
+"Hi, " + username + " 👋";
+
+
+showScreen("welcomeScreen");
+
+}
+
+
+/* -----------------------------
+   GOAL SELECTION
+----------------------------- */
+
+function toggleGoal(element){
+
+const goal = element.dataset.goal;
+
+
+element.classList.toggle("selected");
+
+
+if(selectedGoals.includes(goal)){
+
+selectedGoals =
+selectedGoals.filter(function(item){
+
+return item !== goal;
+
+});
+
+}else{
+
+selectedGoals.push(goal);
+
+}
+
+
+document.getElementById("selectedText").textContent =
+selectedGoals.length + " goal(s) selected";
+
+}
+
+
+/* -----------------------------
+   START QUESTIONS
+----------------------------- */
 
 function startQuestions(){
 
-    if(selectedGoals.length === 0){
+if(selectedGoals.length === 0){
 
-        alert("Please select at least one goal.");
+alert("Please select at least one goal first.");
 
-        return;
-    }
+return;
 
-    questions = [];
-    answers = {};
-    currentQuestion = 0;
-
-    const seen = new Set();
-
-    selectedGoals.forEach(function(goal){
-
-        questionBank[goal].forEach(function(q){
-
-            if(!seen.has(q.text)){
-
-                seen.add(q.text);
-
-                questions.push({
-                    text:q.text,
-                    options:q.options
-                });
-
-            }
-
-        });
-
-    });
-
-    showScreen("questionScreen");
-
-    displayQuestion();
 }
 
 
-// ---------------- DISPLAY QUESTION ----------------
+/* Reset old answers */
 
-function displayQuestion(){
+questions = [];
 
-    const q = questions[currentQuestion];
+answers = {};
 
-    document.getElementById("questionNumber").textContent =
-        "Question " +
-        (currentQuestion + 1) +
-        " of " +
-        questions.length;
+currentQuestion = 0;
 
-    document.getElementById("questionText").textContent =
-        q.text;
 
-    const container =
-        document.getElementById("optionsContainer");
+/* Prevent duplicate questions */
 
-    container.innerHTML = "";
+const seenQuestions = new Set();
 
-    q.options.forEach(function(option,index){
 
-        const div = document.createElement("div");
+selectedGoals.forEach(function(goal){
 
-        div.className = "option";
+if(!questionBank[goal]){
 
-        div.textContent = option;
+return;
 
-        div.onclick = function(){
-
-            document.querySelectorAll(".option")
-            .forEach(function(item){
-                item.classList.remove("selected");
-            });
-
-            div.classList.add("selected");
-
-            answers[currentQuestion] = option;
-        };
-
-        container.appendChild(div);
-
-    });
-
-    if(answers[currentQuestion]){
-
-        document.querySelectorAll(".option")
-        .forEach(function(item){
-
-            if(item.textContent === answers[currentQuestion]){
-                item.classList.add("selected");
-            }
-
-        });
-
-    }
-
-    const percentage =
-        ((currentQuestion + 1) / questions.length) * 100;
-
-    document.getElementById("questionProgress").style.width =
-        percentage + "%";
-
-    document.getElementById("nextButton").textContent =
-        currentQuestion === questions.length - 1
-        ? "Finish Analysis →"
-        : "Next →";
 }
 
 
-// ---------------- NEXT QUESTION ----------------
+questionBank[goal].forEach(function(question){
+
+if(!seenQuestions.has(question.text)){
+
+seenQuestions.add(question.text);
+
+questions.push({
+
+text:question.text,
+
+options:[...question.options]
+
+});
+
+}
+
+});
+
+});
+
+
+/* Safety check */
+
+if(questions.length === 0){
+
+alert("No questions are available for the selected goals.");
+
+return;
+
+}
+
+
+/* Open question screen */
+
+showScreen("questionScreen");
+
+
+/* Display FIRST question */
+
+renderQuestion();
+
+}
+
+
+/* -----------------------------
+   RENDER QUESTION
+----------------------------- */
+
+function renderQuestion(){
+
+if(questions.length === 0){
+
+return;
+
+}
+
+
+const question =
+questions[currentQuestion];
+
+
+document.getElementById("questionNumber").textContent =
+"Question " +
+(currentQuestion + 1) +
+" of " +
+questions.length;
+
+
+document.getElementById("questionText").textContent =
+question.text;
+
+
+const container =
+document.getElementById("optionsContainer");
+
+
+/* Clear previous options */
+
+container.innerHTML = "";
+
+
+/* Create new options */
+
+question.options.forEach(function(optionText){
+
+const option =
+document.createElement("div");
+
+
+option.className = "option";
+
+
+option.textContent = optionText;
+
+
+/* Click event */
+
+option.addEventListener("click",function(){
+
+/* Remove previous selection */
+
+container
+.querySelectorAll(".option")
+.forEach(function(item){
+
+item.classList.remove("selected");
+
+});
+
+
+/* Select current option */
+
+option.classList.add("selected");
+
+
+/* Save answer */
+
+answers[currentQuestion] = optionText;
+
+});
+
+
+container.appendChild(option);
+
+});
+
+
+/* Restore previously selected answer */
+
+if(answers[currentQuestion]){
+
+container
+.querySelectorAll(".option")
+.forEach(function(option){
+
+if(option.textContent === answers[currentQuestion]){
+
+option.classList.add("selected");
+
+}
+
+});
+
+}
+
+
+/* Progress */
+
+const percentage =
+((currentQuestion + 1) /
+questions.length) * 100;
+
+
+document.getElementById("questionProgress").style.width =
+percentage + "%";
+
+
+/* Button text */
+
+if(currentQuestion === questions.length - 1){
+
+document.getElementById("nextButton").textContent =
+"Finish Analysis →";
+
+}else{
+
+document.getElementById("nextButton").textContent =
+"Next →";
+
+}
+
+}
+
+
+/* -----------------------------
+   NEXT QUESTION
+----------------------------- */
 
 function nextQuestion(){
 
-    if(!answers[currentQuestion]){
+/* Make sure answer exists */
 
-        alert("Please select an answer.");
+if(!answers[currentQuestion]){
 
-        return;
-    }
+alert("Please select an answer before continuing.");
 
-    if(currentQuestion < questions.length - 1){
+return;
 
-        currentQuestion++;
-
-        displayQuestion();
-
-    }else{
-
-        runAnalysis();
-
-    }
 }
 
 
-// ---------------- ANALYSIS ----------------
+/* Move forward */
+
+if(currentQuestion < questions.length - 1){
+
+currentQuestion++;
+
+renderQuestion();
+
+}else{
+
+runAnalysis();
+
+}
+
+}
+
+
+/* -----------------------------
+   ANALYSIS
+----------------------------- */
 
 function runAnalysis(){
 
-    showScreen("analysisScreen");
+showScreen("analysisScreen");
 
-    const progress =
-        document.getElementById("analysisProgress");
 
-    progress.style.width = "0%";
+const progress =
+document.getElementById("analysisProgress");
 
-    document.getElementById("analysisMessage").textContent =
-        "Analysing your answers...";
 
-    setTimeout(function(){
-        progress.style.width = "40%";
-    },300);
+const message =
+document.getElementById("analysisMessage");
 
-    setTimeout(function(){
 
-        progress.style.width = "75%";
+progress.style.width = "0%";
 
-        document.getElementById("analysisMessage").textContent =
-            "Finding patterns in your digital habits...";
 
-    },700);
+message.textContent =
+"Analysing your answers...";
 
-    setTimeout(function(){
 
-        progress.style.width = "100%";
+setTimeout(function(){
 
-        document.getElementById("analysisMessage").textContent =
-            "Analysis complete!";
+progress.style.width = "30%";
 
-    },1100);
+},300);
 
-    setTimeout(function(){
 
-        saveHistory();
+setTimeout(function(){
 
-        document.getElementById("resultGoals").textContent =
-            selectedGoals.length;
+progress.style.width = "60%";
 
-        document.getElementById("resultQuestions").textContent =
-            questions.length;
+message.textContent =
+"Finding patterns in your digital habits...";
 
-        document.getElementById("resultText").textContent =
-            "You completed your DigitalBalance AI analysis. Your responses can now be used to identify patterns in screen time, study habits, night usage and distractions.";
+},700);
 
-        showScreen("resultScreen");
 
-    },1400);
+setTimeout(function(){
+
+progress.style.width = "85%";
+
+message.textContent =
+"Preparing your personalised summary...";
+
+},1100);
+
+
+setTimeout(function(){
+
+progress.style.width = "100%";
+
+message.textContent =
+"Analysis complete!";
+
+},1450);
+
+
+setTimeout(function(){
+
+saveHistory();
+
+
+document.getElementById("resultGoals").textContent =
+selectedGoals.length;
+
+
+document.getElementById("resultQuestions").textContent =
+questions.length;
+
+
+document.getElementById("resultText").textContent =
+"You completed your DigitalBalance AI analysis. Your responses can now be used to identify patterns in screen time, study habits, night usage and digital distractions.";
+
+
+showScreen("resultScreen");
+
+},1800);
+
 }
 
 
-// ---------------- HISTORY ----------------
+/* -----------------------------
+   HISTORY KEY
+----------------------------- */
 
 function getHistoryKey(){
 
-    return "digitalBalanceHistory_" +
-        currentUsername.toLowerCase();
+return "digitalBalanceHistory_" +
+currentUsername.toLowerCase();
+
 }
 
+
+/* -----------------------------
+   SAVE HISTORY
+----------------------------- */
 
 function saveHistory(){
 
-    const history =
-        JSON.parse(
-            localStorage.getItem(getHistoryKey()) || "[]"
-        );
+const history =
+JSON.parse(
+localStorage.getItem(getHistoryKey()) || "[]"
+);
 
-    const record = {
 
-        date:new Date().toLocaleDateString(),
+const record = {
 
-        time:new Date().toLocaleTimeString(),
+date:new Date().toLocaleDateString(),
 
-        goals:selectedGoals.length,
+time:new Date().toLocaleTimeString(),
 
-        questions:questions.length
+goals:selectedGoals.length,
 
-    };
+questions:questions.length
 
-    history.push(record);
+};
 
-    localStorage.setItem(
-        getHistoryKey(),
-        JSON.stringify(history)
-    );
+
+history.push(record);
+
+
+localStorage.setItem(
+
+getHistoryKey(),
+
+JSON.stringify(history)
+
+);
+
 }
 
+
+/* -----------------------------
+   OPEN HISTORY
+----------------------------- */
 
 function openHistory(){
 
-    loadHistory();
+loadHistory();
 
-    showScreen("historyScreen");
+showScreen("historyScreen");
+
 }
 
+
+/* -----------------------------
+   LOAD HISTORY
+----------------------------- */
 
 function loadHistory(){
 
-    const history =
-        JSON.parse(
-            localStorage.getItem(getHistoryKey()) || "[]"
-        );
+const history =
+JSON.parse(
+localStorage.getItem(getHistoryKey()) || "[]"
+);
 
-    const container =
-        document.getElementById("historyList");
 
-    container.innerHTML = "";
+const container =
+document.getElementById("historyList");
 
-    if(history.length === 0){
 
-        container.innerHTML =
-            "<p class='small'>No analysis history yet.</p>";
+container.innerHTML = "";
 
-        return;
-    }
 
-    history
-    .slice()
-    .reverse()
-    .forEach(function(record,index){
+if(history.length === 0){
 
-        const div =
-            document.createElement("div");
+container.innerHTML =
+"<p class='small'>No analysis history yet.</p>";
 
-        div.className = "history-item";
+return;
 
-        div.innerHTML =
-            "<strong>Analysis #" +
-            (history.length - index) +
-            "</strong><br>" +
-
-            "<span class='small'>" +
-            record.date +
-            " • " +
-            record.time +
-            "</span><br>" +
-
-            "<span class='small'>" +
-            record.goals +
-            " goal(s) • " +
-            record.questions +
-            " questions answered" +
-            "</span>";
-
-        container.appendChild(div);
-
-    });
 }
 
+
+history
+.slice()
+.reverse()
+.forEach(function(record,index){
+
+const div =
+document.createElement("div");
+
+
+div.className =
+"history-item";
+
+
+div.innerHTML =
+
+"<strong>Analysis #" +
+(history.length - index) +
+"</strong><br>" +
+
+"<span class='small'>" +
+record.date +
+" • " +
+record.time +
+"</span><br>" +
+
+"<span class='small'>" +
+record.goals +
+" goal(s) • " +
+record.questions +
+" questions answered" +
+"</span>";
+
+
+container.appendChild(div);
+
+});
+
+}
+
+
+/* -----------------------------
+   CLEAR HISTORY
+----------------------------- */
 
 function clearHistory(){
 
-    if(confirm("Clear all your analysis history?")){
+if(
+confirm("Clear all your analysis history?")
+){
 
-        localStorage.removeItem(getHistoryKey());
+localStorage.removeItem(
+getHistoryKey()
+);
 
-        loadHistory();
+loadHistory();
 
-    }
+}
+
 }
 
 
-// ---------------- THEME ----------------
+/* -----------------------------
+   THEME
+----------------------------- */
 
 function toggleTheme(){
 
-    document.body.classList.toggle("dark");
+document.body.classList.toggle("dark");
 
-    localStorage.setItem(
-        "digitalBalanceTheme",
-        document.body.classList.contains("dark")
-        ? "dark"
-        : "light"
-    );
+
+localStorage.setItem(
+
+"digitalBalanceTheme",
+
+document.body.classList.contains("dark")
+? "dark"
+: "light"
+
+);
+
 }
 
+
+/* -----------------------------
+   LOAD SAVED THEME
+----------------------------- */
 
 if(
-    localStorage.getItem("digitalBalanceTheme")
-    === "dark"
+localStorage.getItem("digitalBalanceTheme")
+=== "dark"
 ){
 
-    document.body.classList.add("dark");
+document.body.classList.add("dark");
 
 }
+
+
+/* =====================================================
+   BUTTON EVENTS
+===================================================== */
+
+
+/* Login */
+
+document
+.getElementById("loginButton")
+.addEventListener("click",login);
+
+
+/* Welcome */
+
+document
+.getElementById("welcomeButton")
+.addEventListener(
+"click",
+function(){
+
+showScreen("dashboardScreen");
+
+}
+);
+
+
+/* Theme */
+
+document
+.getElementById("themeButton")
+.addEventListener(
+"click",
+toggleTheme
+);
+
+
+/* Goal cards */
+
+document
+.querySelectorAll(".goal")
+.forEach(function(goal){
+
+goal.addEventListener(
+"click",
+function(){
+
+toggleGoal(goal);
+
+}
+);
+
+});
+
+
+/* Start questions */
+
+document
+.getElementById("startButton")
+.addEventListener(
+"click",
+startQuestions
+);
+
+
+/* Next */
+
+document
+.getElementById("nextButton")
+.addEventListener(
+"click",
+nextQuestion
+);
+
+
+/* Exit questions */
+
+document
+.getElementById("exitQuestionButton")
+.addEventListener(
+"click",
+function(){
+
+showScreen("dashboardScreen");
+
+}
+);
+
+
+/* History */
+
+document
+.getElementById("historyButton")
+.addEventListener(
+"click",
+openHistory
+);
+
+
+/* History back */
+
+document
+.getElementById("historyBackButton")
+.addEventListener(
+"click",
+function(){
+
+showScreen("dashboardScreen");
+
+}
+);
+
+
+/* Clear history */
+
+document
+.getElementById("clearHistoryButton")
+.addEventListener(
+"click",
+clearHistory
+);
+
+
+/* Result back */
+
+document
+.getElementById("resultDashboardButton")
+.addEventListener(
+"click",
+function(){
+
+showScreen("dashboardScreen");
+
+}
+);
+
+
+/* Enter key on login */
+
+document
+.getElementById("password")
+.addEventListener(
+"keydown",
+function(event){
+
+if(event.key === "Enter"){
+
+login();
+
+}
+
+});
 
 </script>
 
