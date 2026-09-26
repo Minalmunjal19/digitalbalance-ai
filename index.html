@@ -6,13 +6,16 @@
 <title>DigitalBalance AI</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
 
 body{
 font-family:Arial,sans-serif;
 background:#f5f7fb;
 color:#172033;
-transition:.3s;
 }
 
 body.dark{
@@ -20,8 +23,15 @@ background:#111827;
 color:#f3f4f6;
 }
 
-.screen{display:none;min-height:100vh;padding:20px}
-.screen.active{display:block}
+.screen{
+display:none;
+min-height:100vh;
+padding:20px;
+}
+
+.screen.active{
+display:block;
+}
 
 .container{
 max-width:900px;
@@ -58,7 +68,9 @@ color:#687386;
 margin-bottom:20px;
 }
 
-.dark .subtitle{color:#c5cad3}
+.dark .subtitle{
+color:#c5cad3;
+}
 
 input{
 width:100%;
@@ -148,7 +160,9 @@ color:#687386;
 margin-top:5px;
 }
 
-.dark .goal p{color:#c5cad3}
+.dark .goal p{
+color:#c5cad3;
+}
 
 .question-number{
 color:#4f46e5;
@@ -219,14 +233,18 @@ border-radius:15px;
 background:#eef2ff;
 }
 
-.dark .stat{background:#312e81}
+.dark .stat{
+background:#312e81;
+}
 
 .small{
 font-size:13px;
 color:#687386;
 }
 
-.dark .small{color:#c5cad3}
+.dark .small{
+color:#c5cad3;
+}
 
 .history-item{
 padding:15px 0;
@@ -234,8 +252,15 @@ border-bottom:1px solid #ddd;
 }
 
 @media(max-width:600px){
-.question{font-size:19px}
-.screen{padding:15px}
+
+.question{
+font-size:19px;
+}
+
+.screen{
+padding:15px;
+}
+
 }
 </style>
 </head>
@@ -244,33 +269,53 @@ border-bottom:1px solid #ddd;
 
 <!-- LOGIN -->
 <section id="loginScreen" class="screen active center">
+
 <div class="container">
+
 <div class="card">
 
-<div class="logo">📱 DigitalBalance AI</div>
+<div class="logo">
+📱 DigitalBalance AI
+</div>
 
 <p class="subtitle">
 Understand your digital life. Balance it better.
 </p>
 
-<input id="username" placeholder="Username">
-<input id="password" type="password" placeholder="Password">
+<input
+id="username"
+type="text"
+placeholder="Username">
 
-<button class="primary" onclick="login()">
+<input
+id="password"
+type="password"
+placeholder="Password">
+
+<button
+type="button"
+class="primary"
+id="loginButton">
 Login →
 </button>
 
 </div>
+
 </div>
+
 </section>
 
 
 <!-- WELCOME -->
 <section id="welcomeScreen" class="screen center">
+
 <div class="container">
+
 <div class="card">
 
-<div class="logo">👋 Welcome!</div>
+<div class="logo">
+👋 Welcome!
+</div>
 
 <h2 id="welcomeName"></h2>
 
@@ -278,28 +323,47 @@ Login →
 Let's understand your digital habits.
 </p>
 
-<button class="primary" onclick="show('dashboardScreen')">
+<button
+type="button"
+class="primary"
+onclick="showScreen('dashboardScreen')">
+
 Continue to Dashboard →
+
 </button>
 
 </div>
+
 </div>
+
 </section>
 
 
 <!-- DASHBOARD -->
 <section id="dashboardScreen" class="screen">
+
 <div class="container">
 
 <div class="header">
 
 <div>
+
 <h1>DigitalBalance AI</h1>
-<p id="dashboardName" class="small"></p>
+
+<p
+id="dashboardName"
+class="small">
+</p>
+
 </div>
 
-<button class="secondary" onclick="toggleTheme()">
+<button
+type="button"
+class="secondary"
+onclick="toggleTheme()">
+
 🌙 Theme
+
 </button>
 
 </div>
@@ -313,46 +377,103 @@ Continue to Dashboard →
 Select one or more areas you want to analyse.
 </p>
 
+
 <div class="goal-grid">
 
-<div class="goal" onclick="toggleGoal(this)" data-goal="screen">
+<div
+class="goal"
+data-goal="screen">
+
 <div class="goal-icon">📱</div>
+
 <h3>Screen Time</h3>
-<p>Understand your daily screen usage.</p>
-</div>
 
-<div class="goal" onclick="toggleGoal(this)" data-goal="balance">
-<div class="goal-icon">⚖️</div>
-<h3>Digital Balance</h3>
-<p>Understand your overall digital habits.</p>
-</div>
-
-<div class="goal" onclick="toggleGoal(this)" data-goal="study">
-<div class="goal-icon">📚</div>
-<h3>Study & Screen</h3>
-<p>Analyse study and screen usage.</p>
-</div>
-
-<div class="goal" onclick="toggleGoal(this)" data-goal="night">
-<div class="goal-icon">🌙</div>
-<h3>Night Usage</h3>
-<p>Understand late-night phone usage.</p>
-</div>
-
-<div class="goal" onclick="toggleGoal(this)" data-goal="distraction">
-<div class="goal-icon">🔔</div>
-<h3>Distraction Analyzer</h3>
-<p>Analyse notifications and distractions.</p>
-</div>
-
-</div>
-
-<p id="selectedText" class="small" style="margin-top:15px">
-0 goals selected
+<p>
+Understand your daily screen usage.
 </p>
 
-<button class="primary" onclick="startQuestions()">
+</div>
+
+
+<div
+class="goal"
+data-goal="balance">
+
+<div class="goal-icon">⚖️</div>
+
+<h3>Digital Balance</h3>
+
+<p>
+Understand your overall digital habits.
+</p>
+
+</div>
+
+
+<div
+class="goal"
+data-goal="study">
+
+<div class="goal-icon">📚</div>
+
+<h3>Study & Screen</h3>
+
+<p>
+Analyse study and screen usage.
+</p>
+
+</div>
+
+
+<div
+class="goal"
+data-goal="night">
+
+<div class="goal-icon">🌙</div>
+
+<h3>Night Usage</h3>
+
+<p>
+Understand late-night phone usage.
+</p>
+
+</div>
+
+
+<div
+class="goal"
+data-goal="distraction">
+
+<div class="goal-icon">🔔</div>
+
+<h3>Distraction Analyzer</h3>
+
+<p>
+Analyse notifications and distractions.
+</p>
+
+</div>
+
+</div>
+
+
+<p
+id="selectedText"
+class="small"
+style="margin-top:15px">
+
+0 goals selected
+
+</p>
+
+
+<button
+type="button"
+class="primary"
+id="startButton">
+
 Start Smart Questions →
+
 </button>
 
 </div>
@@ -362,21 +483,37 @@ Start Smart Questions →
 
 <h2>🛠️ Tools</h2>
 
-<button class="secondary" onclick="openHistory()">
+<button
+type="button"
+class="secondary"
+onclick="openHistory()">
+
 🗂️ History
+
 </button>
 
-<button class="secondary" onclick="whatIf()">
+<button
+type="button"
+class="secondary"
+onclick="whatIf()">
+
 🧪 What-If Lab
+
 </button>
 
-<button class="secondary" onclick="chatbot()">
+<button
+type="button"
+class="secondary"
+onclick="chatbot()">
+
 💬 Ask DigitalBalance AI
+
 </button>
 
 </div>
 
 </div>
+
 </section>
 
 
@@ -389,35 +526,55 @@ Start Smart Questions →
 
 <h1>🧠 Smart Questions</h1>
 
-<button class="secondary"
-onclick="show('dashboardScreen')">
+<button
+type="button"
+class="secondary"
+onclick="showScreen('dashboardScreen')">
+
 Exit
+
 </button>
 
 </div>
 
+
 <div class="card">
 
-<div id="questionNumber" class="question-number">
+<div
+id="questionNumber"
+class="question-number">
+
 Question 1
+
 </div>
 
 <div class="progress">
-<div id="questionProgress" class="progress-fill"></div>
+
+<div
+id="questionProgress"
+class="progress-fill">
 </div>
 
-<div id="questionText" class="question"></div>
+</div>
+
+<div
+id="questionText"
+class="question">
+</div>
 
 <div id="options"></div>
 
 <button
+type="button"
 id="nextButton"
-class="primary"
-onclick="nextQuestion()">
+class="primary">
+
 Next →
+
 </button>
 
 </div>
+
 </div>
 
 </section>
@@ -427,21 +584,32 @@ Next →
 <section id="analysisScreen" class="screen center">
 
 <div class="container">
+
 <div class="card">
 
 <div class="logo">
 🔎 Analysing...
 </div>
 
-<p id="analysisText" class="subtitle">
+<p
+id="analysisText"
+class="subtitle">
+
 Analysing your digital habits...
+
 </p>
 
 <div class="progress">
-<div id="analysisProgress" class="progress-fill"></div>
+
+<div
+id="analysisProgress"
+class="progress-fill">
 </div>
 
 </div>
+
+</div>
+
 </div>
 
 </section>
@@ -456,40 +624,76 @@ Analysing your digital habits...
 
 <h1>📊 Your Analysis</h1>
 
-<div id="score" class="score">--</div>
+<div
+id="score"
+class="score">
 
-<p id="resultText" class="subtitle"
-style="text-align:center"></p>
+--
+
+</div>
+
+<p
+id="resultText"
+class="subtitle"
+style="text-align:center">
+
+</p>
+
 
 <div class="stats">
 
 <div class="stat">
-<p class="small">Goals Analysed</p>
-<h2 id="resultGoals">0</h2>
+
+<p class="small">
+Goals Analysed
+</p>
+
+<h2 id="resultGoals">
+0
+</h2>
+
 </div>
+
 
 <div class="stat">
-<p class="small">Questions Answered</p>
-<h2 id="resultQuestions">0</h2>
+
+<p class="small">
+Questions Answered
+</p>
+
+<h2 id="resultQuestions">
+0
+</h2>
+
 </div>
 
 </div>
+
 
 <div style="margin-top:20px">
 
 <p class="small">
-This score is an app-generated digital-habit indicator.
-It is not a medical or psychological assessment.
+
+This score is an app-generated digital-habit
+indicator. It is not a medical or psychological
+assessment.
+
 </p>
 
 </div>
 
-<button class="primary"
-onclick="show('dashboardScreen')">
+
+<button
+type="button"
+class="primary"
+onclick="showScreen('dashboardScreen')">
+
 Back to Dashboard
+
 </button>
 
 </div>
+
 </div>
 
 </section>
@@ -504,20 +708,29 @@ Back to Dashboard
 
 <h1>🗂️ History</h1>
 
-<button class="secondary"
-onclick="show('dashboardScreen')">
+<button
+type="button"
+class="secondary"
+onclick="showScreen('dashboardScreen')">
+
 Back
+
 </button>
 
 </div>
+
 
 <div class="card">
 
 <div id="historyList"></div>
 
-<button class="secondary"
+<button
+type="button"
+class="secondary"
 onclick="clearHistory()">
+
 Clear History
+
 </button>
 
 </div>
@@ -529,175 +742,210 @@ Clear History
 
 <script>
 
-/* =====================================================
+/* ================================
    VARIABLES
-===================================================== */
+================================ */
 
 let username = "";
+
 let selectedGoals = [];
+
 let questions = [];
+
 let answers = [];
+
 let currentQuestion = 0;
 
 
-/* =====================================================
+/* ================================
    QUESTION BANK
-===================================================== */
+================================ */
 
 const questionBank = {
 
-screen: [
-
-["What is your average daily screen time?",
-["Less than 2 hours","2–4 hours","4–6 hours","6–8 hours","More than 8 hours"]],
-
-["Which activity takes most of your screen time?",
-["Social media","Study","Entertainment","Gaming","Other"]],
-
-["How often do you check your phone without a specific reason?",
-["Rarely","Sometimes","Often","Very often"]],
-
-["Do you feel your screen time is higher than you want?",
-["Not at all","A little","Quite a lot","Definitely"]],
-
-["When do you use your phone the most?",
-["Morning","Afternoon","Evening","Night"]],
-
-["How much of your screen time is spent on social media?",
-["Almost none","Less than 1 hour","1–2 hours","More than 2 hours"]],
-
-["How much time do you spend watching videos or entertainment?",
-["Less than 30 minutes","30 minutes–1 hour","1–2 hours","More than 2 hours"]],
-
-["How often do you use your phone during meals or other activities?",
-["Never","Sometimes","Often","Very often"]]
-
+screen:[
+[
+"What is your average daily screen time?",
+["Less than 2 hours","2–4 hours","4–6 hours","6–8 hours","More than 8 hours"]
+],
+[
+"Which activity takes most of your screen time?",
+["Social media","Study","Entertainment","Gaming","Other"]
+],
+[
+"How often do you check your phone without a specific reason?",
+["Rarely","Sometimes","Often","Very often"]
+],
+[
+"Do you feel your screen time is higher than you want?",
+["Not at all","A little","Quite a lot","Definitely"]
+],
+[
+"When do you use your phone the most?",
+["Morning","Afternoon","Evening","Night"]
+],
+[
+"How much of your screen time is spent on social media?",
+["Almost none","Less than 1 hour","1–2 hours","More than 2 hours"]
+],
+[
+"How much time do you spend watching videos or entertainment?",
+["Less than 30 minutes","30 minutes–1 hour","1–2 hours","More than 2 hours"]
+],
+[
+"How often do you use your phone during meals or other activities?",
+["Never","Sometimes","Often","Very often"]
+]
 ],
 
-
-balance: [
-
-["How satisfied are you with your current digital habits?",
-["Very satisfied","Satisfied","Neutral","Not satisfied"]],
-
-["How often do you continue using your phone longer than planned?",
-["Never","Sometimes","Often","Almost always"]],
-
-["What usually triggers extra phone use?",
-["Boredom","Notifications","Stress","Habit","Nothing specific"]],
-
-["How difficult is it to put your phone away when needed?",
-["Not difficult","Slightly difficult","Quite difficult","Very difficult"]],
-
-["How often do you successfully control your planned screen time?",
-["Almost always","Often","Sometimes","Rarely"]],
-
-["How balanced is your time between online and offline activities?",
-["Very balanced","Mostly balanced","Somewhat unbalanced","Very unbalanced"]],
-
-["Which digital habit affects your routine the most?",
-["Social media","Videos","Gaming","Notifications","Phone checking"]],
-
-["Which digital habit would you most like to improve?",
-["Screen time","Social media","Night usage","Distractions","Phone checking"]]
-
+balance:[
+[
+"How satisfied are you with your current digital habits?",
+["Very satisfied","Satisfied","Neutral","Not satisfied"]
+],
+[
+"How often do you continue using your phone longer than planned?",
+["Never","Sometimes","Often","Almost always"]
+],
+[
+"What usually triggers extra phone use?",
+["Boredom","Notifications","Stress","Habit","Nothing specific"]
+],
+[
+"How difficult is it to put your phone away when needed?",
+["Not difficult","Slightly difficult","Quite difficult","Very difficult"]
+],
+[
+"How often do you successfully control your planned screen time?",
+["Almost always","Often","Sometimes","Rarely"]
+],
+[
+"How balanced is your time between online and offline activities?",
+["Very balanced","Mostly balanced","Somewhat unbalanced","Very unbalanced"]
+],
+[
+"Which digital habit affects your routine the most?",
+["Social media","Videos","Gaming","Notifications","Phone checking"]
+],
+[
+"Which digital habit would you most like to improve?",
+["Screen time","Social media","Night usage","Distractions","Phone checking"]
+]
 ],
 
-
-study: [
-
-["How much screen time is usually related to study?",
-["Less than 1 hour","1–2 hours","2–4 hours","More than 4 hours"]],
-
-["How often does your phone interrupt your study?",
-["Never","Sometimes","Often","Very often"]],
-
-["Do you use your phone for non-study activities while studying?",
-["Never","Sometimes","Often","Very often"]],
-
-["When do you usually study most effectively?",
-["Morning","Afternoon","Evening","Night"]],
-
-["How often do notifications appear during study sessions?",
-["Rarely","Sometimes","Often","Very often"]],
-
-["How often do you check your phone during study breaks?",
-["Never","Sometimes","Often","Every break"]],
-
-["How often does social media make it harder to return to studying?",
-["Never","Sometimes","Often","Very often"]],
-
-["Which digital tool do you use most for studying?",
-["Educational videos","Search engines","Notes/PDFs","Learning apps","Other"]]
-
+study:[
+[
+"How much screen time is usually related to study?",
+["Less than 1 hour","1–2 hours","2–4 hours","More than 4 hours"]
+],
+[
+"How often does your phone interrupt your study?",
+["Never","Sometimes","Often","Very often"]
+],
+[
+"Do you use your phone for non-study activities while studying?",
+["Never","Sometimes","Often","Very often"]
+],
+[
+"When do you usually study most effectively?",
+["Morning","Afternoon","Evening","Night"]
+],
+[
+"How often do notifications appear during study sessions?",
+["Rarely","Sometimes","Often","Very often"]
+],
+[
+"How often do you check your phone during study breaks?",
+["Never","Sometimes","Often","Every break"]
+],
+[
+"How often does social media make it harder to return to studying?",
+["Never","Sometimes","Often","Very often"]
+],
+[
+"Which digital tool do you use most for studying?",
+["Educational videos","Search engines","Notes/PDFs","Learning apps","Other"]
+]
 ],
 
-
-night: [
-
-["How often do you use your phone after your planned bedtime?",
-["Never","Sometimes","Often","Almost every day"]],
-
-["What do you usually do on your phone at night?",
-["Social media","Videos","Study","Chatting","Other"]],
-
-["How often do you check your phone after going to bed?",
-["Never","Once","2–3 times","Many times"]],
-
-["Do you feel your night-time phone use is longer than planned?",
-["No","A little","Often","Yes, definitely"]],
-
-["How long do you usually use your phone after bedtime?",
-["Less than 15 minutes","15–30 minutes","30–60 minutes","More than 1 hour"]],
-
-["What is the main reason you use your phone late at night?",
-["Entertainment","Social media","Study","Chatting","Habit"]],
-
-["How often does phone use delay your intended bedtime?",
-["Never","Sometimes","Often","Almost every day"]],
-
-["Do you usually keep your phone near you while sleeping?",
-["Yes","No","Sometimes"]]
-
+night:[
+[
+"How often do you use your phone after your planned bedtime?",
+["Never","Sometimes","Often","Almost every day"]
+],
+[
+"What do you usually do on your phone at night?",
+["Social media","Videos","Study","Chatting","Other"]
+],
+[
+"How often do you check your phone after going to bed?",
+["Never","Once","2–3 times","Many times"]
+],
+[
+"Do you feel your night-time phone use is longer than planned?",
+["No","A little","Often","Yes, definitely"]
+],
+[
+"How long do you usually use your phone after bedtime?",
+["Less than 15 minutes","15–30 minutes","30–60 minutes","More than 1 hour"]
+],
+[
+"What is the main reason you use your phone late at night?",
+["Entertainment","Social media","Study","Chatting","Habit"]
+],
+[
+"How often does phone use delay your intended bedtime?",
+["Never","Sometimes","Often","Almost every day"]
+],
+[
+"Do you usually keep your phone near you while sleeping?",
+["Yes","No","Sometimes"]
+]
 ],
 
-
-distraction: [
-
-["How often do notifications interrupt you while studying?",
-["Never","Sometimes","Often","Very often"]],
-
-["How frequently do you switch between apps while studying?",
-["Rarely","Sometimes","Often","Very often"]],
-
-["How often do you unlock your phone just to check it?",
-["Rarely","Sometimes","Often","Very often"]],
-
-["Which distraction affects you the most?",
-["Social media","Messages","Notifications","Videos","Other"]],
-
-["How often do you check notifications immediately?",
-["Rarely","Sometimes","Often","Always"]],
-
-["How often does checking your phone make you lose focus?",
-["Never","Sometimes","Often","Very often"]],
-
-["Which type of app distracts you the most?",
-["Social media","Video apps","Games","Messaging apps","Other"]],
-
-["How difficult is it to return to studying after checking your phone?",
-["Not difficult","Slightly difficult","Quite difficult","Very difficult"]]
-
+distraction:[
+[
+"How often do notifications interrupt you while studying?",
+["Never","Sometimes","Often","Very often"]
+],
+[
+"How frequently do you switch between apps while studying?",
+["Rarely","Sometimes","Often","Very often"]
+],
+[
+"How often do you unlock your phone just to check it?",
+["Rarely","Sometimes","Often","Very often"]
+],
+[
+"Which distraction affects you the most?",
+["Social media","Messages","Notifications","Videos","Other"]
+],
+[
+"How often do you check notifications immediately?",
+["Rarely","Sometimes","Often","Always"]
+],
+[
+"How often does checking your phone make you lose focus?",
+["Never","Sometimes","Often","Very often"]
+],
+[
+"Which type of app distracts you the most?",
+["Social media","Video apps","Games","Messaging apps","Other"]
+],
+[
+"How difficult is it to return to studying after checking your phone?",
+["Not difficult","Slightly difficult","Quite difficult","Very difficult"]
+]
 ]
 
 };
 
 
-/* =====================================================
-   SCREEN SWITCH
-===================================================== */
+/* ================================
+   SCREEN
+================================ */
 
-function show(id){
+function showScreen(id){
 
 document.querySelectorAll(".screen").forEach(function(screen){
 
@@ -712,19 +960,19 @@ window.scrollTo(0,0);
 }
 
 
-/* =====================================================
+/* ================================
    LOGIN
-===================================================== */
+================================ */
 
 function login(){
 
-let name =
+const name =
 document.getElementById("username").value.trim();
 
-let pass =
+const password =
 document.getElementById("password").value.trim();
 
-if(name === "" || pass === ""){
+if(name === "" || password === ""){
 
 alert("Please enter username and password.");
 
@@ -740,66 +988,83 @@ document.getElementById("welcomeName").textContent =
 document.getElementById("dashboardName").textContent =
 "Hi, " + username + " 👋";
 
-show("welcomeScreen");
+showScreen("welcomeScreen");
 
 }
 
 
-/* =====================================================
+/* ================================
+   LOGIN BUTTON
+================================ */
+
+document.getElementById("loginButton").addEventListener(
+"click",
+login
+);
+
+
+/* ================================
    GOAL SELECTION
-===================================================== */
+================================ */
 
-function toggleGoal(element){
+document.querySelectorAll(".goal").forEach(function(goalElement){
 
-let goal = element.dataset.goal;
+goalElement.addEventListener("click",function(){
+
+const goal =
+this.dataset.goal;
 
 if(selectedGoals.includes(goal)){
 
 selectedGoals =
-selectedGoals.filter(function(g){
-return g !== goal;
+selectedGoals.filter(function(item){
+
+return item !== goal;
+
 });
 
-element.classList.remove("selected");
+this.classList.remove("selected");
 
 }else{
 
 selectedGoals.push(goal);
 
-element.classList.add("selected");
+this.classList.add("selected");
 
 }
 
 document.getElementById("selectedText").textContent =
 selectedGoals.length + " goal(s) selected";
 
-}
+});
+
+});
 
 
-/* =====================================================
-   SMART QUESTION LIMIT
-===================================================== */
+/* ================================
+   QUESTION LIMIT
+================================ */
 
-function getLimit(){
-
-const numberOfGoals = selectedGoals.length;
+function getQuestionLimit(){
 
 const limits = {
+
 1:8,
 2:12,
 3:15,
 4:18,
 5:20
+
 };
 
-return limits[numberOfGoals] || 0;
+return limits[selectedGoals.length] || 0;
 
 }
 
 
-/* =====================================================
-   CREATE SMART QUESTIONS
-===================================================== */
+/* ================================
+   START QUESTIONS
+================================ */
 
 function startQuestions(){
 
@@ -812,142 +1077,115 @@ return;
 }
 
 questions = [];
+
 answers = [];
+
 currentQuestion = 0;
 
+const limit =
+getQuestionLimit();
 
-/*
-Each selected goal contributes questions
-in a round-robin pattern.
-
-Example with 3 goals:
-
-Goal 1 → Q1
-Goal 2 → Q1
-Goal 3 → Q1
-Goal 1 → Q2
-Goal 2 → Q2
-Goal 3 → Q2
-
-This keeps the questionnaire balanced.
-*/
-
-const limit = getLimit();
-
-const positions = {};
+const position = {};
 
 selectedGoals.forEach(function(goal){
 
-positions[goal] = 0;
+position[goal] = 0;
 
 });
 
 
 while(questions.length < limit){
 
-let addedThisRound = false;
+let added = false;
 
-for(let i = 0; i < selectedGoals.length; i++){
+for(let i=0;i<selectedGoals.length;i++){
 
 if(questions.length >= limit){
+
 break;
+
 }
 
-const goal = selectedGoals[i];
+const goal =
+selectedGoals[i];
 
-const list = questionBank[goal];
+const list =
+questionBank[goal];
 
-const position = positions[goal];
+const index =
+position[goal];
 
-if(position < list.length){
+if(index < list.length){
 
 questions.push({
 
-text:list[position][0],
+text:list[index][0],
 
-options:list[position][1],
+options:list[index][1],
 
 goal:goal
 
 });
 
-positions[goal]++;
+position[goal]++;
 
-addedThisRound = true;
-
-}
+added = true;
 
 }
 
-if(!addedThisRound){
+}
+
+if(!added){
+
 break;
-}
 
 }
-
-
-/*
-FINAL SAFETY CHECK
-
-The number of questions can NEVER
-be greater than the selected limit.
-*/
-
-if(questions.length > limit){
-
-questions.length = limit;
 
 }
 
 
-/*
-Extra safety: reset all answers.
-*/
+/* Absolute safety limit */
 
-answers = new Array(questions.length);
+questions =
+questions.slice(0,limit);
 
-
-console.log("Goals:",selectedGoals.length);
-console.log("Limit:",limit);
-console.log("Created:",questions.length);
+answers =
+new Array(questions.length);
 
 
-/*
-If something unexpected happens,
-stop instead of showing the wrong count.
-*/
+if(questions.length === 0){
 
-if(questions.length !== limit){
-
-alert(
-"Something went wrong while creating the questionnaire. Please try again."
-);
+alert("Unable to create questions.");
 
 return;
 
 }
 
-
-show("questionScreen");
+showScreen("questionScreen");
 
 renderQuestion();
 
 }
 
 
-/* =====================================================
+/* ================================
+   START BUTTON
+================================ */
+
+document.getElementById("startButton").addEventListener(
+"click",
+startQuestions
+);
+
+
+/* ================================
    RENDER QUESTION
-===================================================== */
+================================ */
 
 function renderQuestion(){
 
-if(!questions.length){
-
-return;
-
-}
-
-const q = questions[currentQuestion];
+const q =
+questions[currentQuestion];
 
 document.getElementById("questionNumber").textContent =
 "Question " +
@@ -955,44 +1193,40 @@ document.getElementById("questionNumber").textContent =
 " of " +
 questions.length;
 
-
 document.getElementById("questionText").textContent =
 q.text;
 
-
-const box =
+const optionsBox =
 document.getElementById("options");
 
-box.innerHTML = "";
-
+optionsBox.innerHTML = "";
 
 q.options.forEach(function(optionText){
 
-const div =
+const option =
 document.createElement("div");
 
-div.className = "option";
+option.className = "option";
 
-div.textContent = optionText;
+option.textContent =
+optionText;
 
+option.addEventListener("click",function(){
 
-div.onclick = function(){
+optionsBox.querySelectorAll(".option").forEach(function(item){
 
-box.querySelectorAll(".option").forEach(function(option){
-
-option.classList.remove("selected");
+item.classList.remove("selected");
 
 });
 
-div.classList.add("selected");
+option.classList.add("selected");
 
 answers[currentQuestion] =
 optionText;
 
-};
+});
 
-
-box.appendChild(div);
+optionsBox.appendChild(option);
 
 });
 
@@ -1000,7 +1234,6 @@ box.appendChild(div);
 const percentage =
 ((currentQuestion + 1) /
 questions.length) * 100;
-
 
 document.getElementById("questionProgress").style.width =
 percentage + "%";
@@ -1021,9 +1254,15 @@ document.getElementById("nextButton").textContent =
 }
 
 
-/* =====================================================
-   NEXT QUESTION
-===================================================== */
+/* ================================
+   NEXT BUTTON
+================================ */
+
+document.getElementById("nextButton").addEventListener(
+"click",
+nextQuestion
+);
+
 
 function nextQuestion(){
 
@@ -1035,8 +1274,8 @@ return;
 
 }
 
-
-if(currentQuestion < questions.length - 1){
+if(currentQuestion <
+questions.length - 1){
 
 currentQuestion++;
 
@@ -1051,14 +1290,13 @@ runAnalysis();
 }
 
 
-/* =====================================================
+/* ================================
    SCORE
-===================================================== */
+================================ */
 
 function calculateScore(){
 
 let total = 0;
-
 
 answers.forEach(function(answer){
 
@@ -1075,9 +1313,7 @@ answer === "No"
 
 total += 100;
 
-}
-
-else if(
+}else if(
 answer === "Sometimes" ||
 answer === "Satisfied" ||
 answer === "Mostly balanced" ||
@@ -1087,18 +1323,14 @@ answer === "A little"
 
 total += 75;
 
-}
-
-else if(
+}else if(
 answer === "Neutral" ||
 answer === "Often"
 ){
 
 total += 60;
 
-}
-
-else{
+}else{
 
 total += 35;
 
@@ -1106,21 +1338,26 @@ total += 35;
 
 });
 
+if(answers.length === 0){
 
-return answers.length
-? Math.round(total / answers.length)
-: 0;
+return 0;
+
+}
+
+return Math.round(
+total / answers.length
+);
 
 }
 
 
-/* =====================================================
+/* ================================
    ANALYSIS
-===================================================== */
+================================ */
 
 function runAnalysis(){
 
-show("analysisScreen");
+showScreen("analysisScreen");
 
 const progress =
 document.getElementById("analysisProgress");
@@ -1128,9 +1365,7 @@ document.getElementById("analysisProgress");
 const text =
 document.getElementById("analysisText");
 
-
 progress.style.width = "0%";
-
 
 setTimeout(function(){
 
@@ -1141,7 +1376,6 @@ text.textContent =
 
 },400);
 
-
 setTimeout(function(){
 
 progress.style.width = "60%";
@@ -1150,7 +1384,6 @@ text.textContent =
 "Finding digital-use patterns...";
 
 },800);
-
 
 setTimeout(function(){
 
@@ -1161,7 +1394,6 @@ text.textContent =
 
 },1200);
 
-
 setTimeout(function(){
 
 progress.style.width = "100%";
@@ -1169,35 +1401,30 @@ progress.style.width = "100%";
 const score =
 calculateScore();
 
-
 document.getElementById("score").textContent =
 score + "/100";
-
 
 document.getElementById("resultGoals").textContent =
 selectedGoals.length;
 
-
 document.getElementById("resultQuestions").textContent =
 questions.length;
-
 
 document.getElementById("resultText").textContent =
 "Your DigitalBalance AI analysis is complete. Your answers provide a snapshot of your current digital-use patterns.";
 
-
 saveHistory();
 
-show("resultScreen");
+showScreen("resultScreen");
 
 },1700);
 
 }
 
 
-/* =====================================================
+/* ================================
    HISTORY
-===================================================== */
+================================ */
 
 function historyKey(){
 
@@ -1209,11 +1436,10 @@ username.toLowerCase();
 
 function saveHistory(){
 
-let history =
+const history =
 JSON.parse(
 localStorage.getItem(historyKey()) || "[]"
 );
-
 
 history.push({
 
@@ -1227,7 +1453,6 @@ score:calculateScore()
 
 });
 
-
 localStorage.setItem(
 historyKey(),
 JSON.stringify(history)
@@ -1238,17 +1463,15 @@ JSON.stringify(history)
 
 function openHistory(){
 
-let history =
+const history =
 JSON.parse(
 localStorage.getItem(historyKey()) || "[]"
 );
 
-
-let box =
+const box =
 document.getElementById("historyList");
 
 box.innerHTML = "";
-
 
 if(history.length === 0){
 
@@ -1257,9 +1480,9 @@ box.innerHTML =
 
 }else{
 
-history.reverse().forEach(function(item,index){
+history.slice().reverse().forEach(function(item,index){
 
-let div =
+const div =
 document.createElement("div");
 
 div.className =
@@ -1287,7 +1510,7 @@ box.appendChild(div);
 
 }
 
-show("historyScreen");
+showScreen("historyScreen");
 
 }
 
@@ -1301,9 +1524,9 @@ openHistory();
 }
 
 
-/* =====================================================
+/* ================================
    THEME
-===================================================== */
+================================ */
 
 function toggleTheme(){
 
@@ -1318,7 +1541,6 @@ document.body.classList.contains("dark")
 
 }
 
-
 if(
 localStorage.getItem("DBTheme") === "dark"
 ){
@@ -1328,9 +1550,9 @@ document.body.classList.add("dark");
 }
 
 
-/* =====================================================
+/* ================================
    EXTRA FEATURES
-===================================================== */
+================================ */
 
 function whatIf(){
 
