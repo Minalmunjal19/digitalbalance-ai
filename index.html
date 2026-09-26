@@ -6,6 +6,10 @@
 
     <title>DigitalBalance AI</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         * {
             box-sizing: border-box;
@@ -13,62 +17,315 @@
             padding: 0;
         }
 
+        :root {
+            --bg: #f5f7fb;
+            --card: #ffffff;
+            --text: #172033;
+            --muted: #667085;
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --soft: #eef2ff;
+            --border: #e5e7eb;
+        }
+
+        body.dark {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f8fafc;
+            --muted: #cbd5e1;
+            --primary: #818cf8;
+            --primary-dark: #6366f1;
+            --soft: #312e81;
+            --border: #334155;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f5f7fb;
-            color: #172033;
+            font-family: "Poppins", sans-serif;
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 24px;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         .app {
             width: 100%;
             max-width: 430px;
-            background: white;
+            background: var(--card);
             border-radius: 28px;
-            padding: 40px 26px;
+            padding: 36px 26px;
             text-align: center;
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
         }
 
-        .logo {
-            font-size: 52px;
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
             margin-bottom: 18px;
         }
 
+        .theme-btn {
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            background: var(--card);
+            color: var(--text);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .logo {
+            font-size: 56px;
+            margin-bottom: 14px;
+        }
+
         h1 {
-            font-size: 32px;
+            font-size: 30px;
+            line-height: 1.2;
             margin-bottom: 12px;
+            font-weight: 700;
         }
 
         .tagline {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #667085;
-            margin-bottom: 30px;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--muted);
+            margin-bottom: 24px;
         }
 
         .badge {
             display: inline-block;
             padding: 8px 14px;
             border-radius: 20px;
-            background: #eef2ff;
-            color: #4f46e5;
-            font-size: 13px;
+            background: var(--soft);
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 600;
             margin-bottom: 28px;
         }
 
-        button {
+        .start-btn {
             width: 100%;
             border: none;
             border-radius: 16px;
             padding: 16px;
+            font-family: "Poppins", sans-serif;
             font-size: 16px;
-            font-weight: bold;
-            background: #4f46e5;
+            font-weight: 600;
+            background: var(--primary);
             color: white;
             cursor: pointer;
-       
+            transition: 0.2s;
+        }
+
+        .start-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .privacy {
+            margin-top: 20px;
+            font-size: 11px;
+            line-height: 1.6;
+            color: var(--muted);
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        .back-btn {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 25px;
+        }
+
+        .option {
+            width: 100%;
+            padding: 15px;
+            margin-top: 12px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: var(--card);
+            color: var(--text);
+            font-family: "Poppins", sans-serif;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            border-color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="app">
+
+        <!-- Welcome Screen -->
+        <section id="welcomeScreen" class="screen active">
+
+            <div class="top-bar">
+                <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+                    🌙
+                </button>
+            </div>
+
+            <div class="logo">📱⚖️</div>
+
+            <h1>DigitalBalance AI</h1>
+
+            <p class="tagline">
+                Understand your digital life.<br>
+                Balance it better.
+            </p>
+
+            <div class="badge">
+                AI • Python • Data Analytics • Privacy First
+            </div>
+
+            <button class="start-btn" onclick="startApp()">
+                Get Started →
+            </button>
+
+            <p class="privacy">
+                🔒 Your data stays under your control.
+                DigitalBalance AI does not secretly monitor your device.
+            </p>
+
+        </section>
+
+
+        <!-- Goal Selection Screen -->
+        <section id="goalScreen" class="screen">
+
+            <button class="back-btn" onclick="goBack()">
+                ← Back
+            </button>
+
+            <h1>What would you like to analyze?</h1>
+
+            <p class="tagline">
+                Select one or more areas to explore your digital habits.
+            </p>
+
+            <button class="option" onclick="selectGoal('screen')">
+                📱 Screen Time
+            </button>
+
+            <button class="option" onclick="selectGoal('balance')">
+                ⚖️ Digital Balance
+            </button>
+
+            <button class="option" onclick="selectGoal('study')">
+                📚 Study & Screen
+            </button>
+
+            <button class="option" onclick="selectGoal('night')">
+                🌙 Night Usage
+            </button>
+
+            <button class="option" onclick="selectGoal('distraction')">
+                🔔 Distraction Analyzer
+            </button>
+
+        </section>
+
+
+        <!-- Message Screen -->
+        <section id="messageScreen" class="screen">
+
+            <button class="back-btn" onclick="showScreen('goalScreen')">
+                ← Back
+            </button>
+
+            <div class="logo">✨</div>
+
+            <h1 id="messageTitle">Great choice!</h1>
+
+            <p class="tagline" id="messageText">
+                Your personalized analysis will appear here.
+            </p>
+
+            <button class="start-btn" onclick="showScreen('goalScreen')">
+                Choose Another Goal
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        function showScreen(screenId) {
+
+            document.querySelectorAll(".screen").forEach(function(screen) {
+                screen.classList.remove("active");
+            });
+
+            document.getElementById(screenId).classList.add("active");
+        }
+
+
+        function startApp() {
+            showScreen("goalScreen");
+        }
+
+
+        function goBack() {
+            showScreen("welcomeScreen");
+        }
+
+
+        function selectGoal(goal) {
+
+            const titles = {
+                screen: "📱 Screen Time",
+                balance: "⚖️ Digital Balance",
+                study: "📚 Study & Screen",
+                night: "🌙 Night Usage",
+                distraction: "🔔 Distraction Analyzer"
+            };
+
+            document.getElementById("messageTitle").textContent =
+                titles[goal];
+
+            document.getElementById("messageText").textContent =
+                "This analysis module is ready. Next, we will add the smart questions, Python analysis, graphs and personalized AI insights.";
+
+            showScreen("messageScreen");
+        }
+
+
+        function toggleTheme() {
+
+            document.body.classList.toggle("dark");
+
+            const button = document.querySelector(".theme-btn");
+
+            if (document.body.classList.contains("dark")) {
+                button.textContent = "☀️";
+            } else {
+                button.textContent = "🌙";
+            }
+        }
+
+    </script>
+
+</body>
+</html>
