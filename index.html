@@ -211,7 +211,6 @@ button{
 
 .option:hover{
     border-color:#818cf8;
-    transform:translateX(2px);
 }
 
 .option.selected{
@@ -240,7 +239,7 @@ button{
     height:100%;
     width:0%;
     background:#4f46e5;
-    transition:.3s;
+    transition:.4s;
 }
 
 .stats{
@@ -293,6 +292,18 @@ button{
     background:#312e81;
 }
 
+.result-score{
+    font-size:48px;
+    font-weight:700;
+    color:#4f46e5;
+    text-align:center;
+    margin:20px 0;
+}
+
+.dark .result-score{
+    color:#a5b4fc;
+}
+
 @media(max-width:600px){
 
     .screen{
@@ -307,16 +318,13 @@ button{
         font-size:19px;
     }
 
-    .header{
-        align-items:flex-start;
-    }
-
 }
 
 </style>
 </head>
 
 <body>
+
 
 <!-- ================= LOGIN ================= -->
 
@@ -338,14 +346,12 @@ Understand your digital life. Balance it better.
 id="username"
 type="text"
 placeholder="Username"
-autocomplete="username"
 >
 
 <input
 id="password"
 type="password"
 placeholder="Password"
-autocomplete="current-password"
 >
 
 <button
@@ -403,8 +409,14 @@ Continue to Dashboard →
 <div class="header">
 
 <div>
+
 <h1>DigitalBalance AI</h1>
-<p id="dashboardGreeting" class="small"></p>
+
+<p
+id="dashboardGreeting"
+class="small"
+></p>
+
 </div>
 
 <button
@@ -429,7 +441,10 @@ Select one or more areas you want DigitalBalance AI to analyse.
 <div class="goal-grid">
 
 
-<div class="goal" data-goal="screen">
+<div
+class="goal"
+data-goal="screen"
+>
 
 <div class="goal-icon">📱</div>
 
@@ -442,7 +457,10 @@ Understand your daily screen usage.
 </div>
 
 
-<div class="goal" data-goal="balance">
+<div
+class="goal"
+data-goal="balance"
+>
 
 <div class="goal-icon">⚖️</div>
 
@@ -455,7 +473,10 @@ Understand your overall digital habits.
 </div>
 
 
-<div class="goal" data-goal="study">
+<div
+class="goal"
+data-goal="study"
+>
 
 <div class="goal-icon">📚</div>
 
@@ -468,7 +489,10 @@ Analyse study and entertainment screen use.
 </div>
 
 
-<div class="goal" data-goal="night">
+<div
+class="goal"
+data-goal="night"
+>
 
 <div class="goal-icon">🌙</div>
 
@@ -481,7 +505,10 @@ Understand your late-night phone usage.
 </div>
 
 
-<div class="goal" data-goal="distraction">
+<div
+class="goal"
+data-goal="distraction"
+>
 
 <div class="goal-icon">🔔</div>
 
@@ -529,14 +556,14 @@ class="secondary"
 
 <button
 class="secondary"
-onclick="alert('What-If Lab will be added in the next development step.')"
+onclick="alert('What-If Lab will be added next.')"
 >
 🧪 What-If Lab
 </button>
 
 <button
 class="secondary"
-onclick="alert('AI Chatbot will be added in the next development step.')"
+onclick="alert('AI Chatbot will be added next.')"
 >
 💬 Ask DigitalBalance AI
 </button>
@@ -583,8 +610,7 @@ Question 1
 <div
 id="questionProgress"
 class="progress-fill"
->
-</div>
+></div>
 
 </div>
 
@@ -593,7 +619,7 @@ class="progress-fill"
 id="questionText"
 class="question"
 >
-Loading question...
+Loading...
 </div>
 
 
@@ -633,7 +659,7 @@ class="screen center-screen"
 id="analysisMessage"
 class="subtitle"
 >
-Finding patterns in your digital habits...
+Analysing your digital habits...
 </p>
 
 <div class="progress-bar">
@@ -641,8 +667,7 @@ Finding patterns in your digital habits...
 <div
 id="analysisProgress"
 class="progress-fill"
->
-</div>
+></div>
 
 </div>
 
@@ -676,14 +701,23 @@ Your personalised digital habit summary
 
 <div class="card">
 
-<h2>
+<h2 id="resultTitle">
 Analysis Complete 🎉
 </h2>
+
+
+<div
+id="resultScore"
+class="result-score"
+>
+--
+</div>
+
 
 <p
 id="resultText"
 class="subtitle"
-style="margin-top:12px;"
+style="text-align:center;"
 >
 </p>
 
@@ -728,14 +762,14 @@ class="stat-number"
 
 <div class="info-box">
 
-<strong>💡 What's next?</strong>
+<strong>💡 Your next step</strong>
 
 <p
 class="small"
 style="margin-top:6px;"
 >
-Your answers can be used to generate personalised insights,
-patterns and graphs.
+Your answers can be used to create personalised insights,
+graphs and progress tracking.
 </p>
 
 </div>
@@ -805,15 +839,10 @@ Clear History
 
 <script>
 
+
 /* =====================================================
-   DIGITALBALANCE AI
-   MAIN APPLICATION
+   VARIABLES
 ===================================================== */
-
-
-/* -----------------------------
-   GLOBAL VARIABLES
------------------------------ */
 
 let currentUsername = "";
 
@@ -826,11 +855,12 @@ let currentQuestion = 0;
 let answers = {};
 
 
-/* -----------------------------
-   QUESTION DATABASE
------------------------------ */
+/* =====================================================
+   QUESTION BANK
+===================================================== */
 
 const questionBank = {
+
 
 screen: [
 
@@ -874,6 +904,46 @@ options:[
 "Quite a lot",
 "Definitely"
 ]
+},
+
+{
+text:"When do you use your phone the most?",
+options:[
+"Morning",
+"Afternoon",
+"Evening",
+"Night"
+]
+},
+
+{
+text:"How much of your screen time is spent on social media?",
+options:[
+"Almost none",
+"Less than 1 hour",
+"1–2 hours",
+"More than 2 hours"
+]
+},
+
+{
+text:"How much time do you spend watching videos or entertainment?",
+options:[
+"Less than 30 minutes",
+"30 minutes–1 hour",
+"1–2 hours",
+"More than 2 hours"
+]
+},
+
+{
+text:"How often do you use your phone during meals or other activities?",
+options:[
+"Never",
+"Sometimes",
+"Often",
+"Very often"
+]
 }
 
 ],
@@ -913,12 +983,54 @@ options:[
 },
 
 {
-text:"How difficult is it for you to put your phone away when needed?",
+text:"How difficult is it to put your phone away when needed?",
 options:[
 "Not difficult",
 "Slightly difficult",
 "Quite difficult",
 "Very difficult"
+]
+},
+
+{
+text:"How often do you successfully control your planned screen time?",
+options:[
+"Almost always",
+"Often",
+"Sometimes",
+"Rarely"
+]
+},
+
+{
+text:"How balanced is your time between online and offline activities?",
+options:[
+"Very balanced",
+"Mostly balanced",
+"Somewhat unbalanced",
+"Very unbalanced"
+]
+},
+
+{
+text:"Which digital habit affects your routine the most?",
+options:[
+"Social media",
+"Videos",
+"Gaming",
+"Notifications",
+"Phone checking"
+]
+},
+
+{
+text:"Which digital habit would you most like to improve?",
+options:[
+"Screen time",
+"Social media",
+"Night usage",
+"Distractions",
+"Phone checking"
 ]
 }
 
@@ -948,7 +1060,7 @@ options:[
 },
 
 {
-text:"Do you use your phone while studying for non-study activities?",
+text:"Do you use your phone for non-study activities while studying?",
 options:[
 "Never",
 "Sometimes",
@@ -964,6 +1076,47 @@ options:[
 "Afternoon",
 "Evening",
 "Night"
+]
+},
+
+{
+text:"How often do notifications appear during study sessions?",
+options:[
+"Rarely",
+"Sometimes",
+"Often",
+"Very often"
+]
+},
+
+{
+text:"How often do you check your phone during study breaks?",
+options:[
+"Never",
+"Sometimes",
+"Often",
+"Every break"
+]
+},
+
+{
+text:"How often does social media make it harder to return to studying?",
+options:[
+"Never",
+"Sometimes",
+"Often",
+"Very often"
+]
+},
+
+{
+text:"Which digital tool do you use most for studying?",
+options:[
+"Educational videos",
+"Search engines",
+"Notes/PDFs",
+"Learning apps",
+"Other"
 ]
 }
 
@@ -1011,6 +1164,46 @@ options:[
 "Often",
 "Yes, definitely"
 ]
+},
+
+{
+text:"How long do you usually use your phone after bedtime?",
+options:[
+"Less than 15 minutes",
+"15–30 minutes",
+"30–60 minutes",
+"More than 1 hour"
+]
+},
+
+{
+text:"What is the main reason you use your phone late at night?",
+options:[
+"Entertainment",
+"Social media",
+"Study",
+"Chatting",
+"Habit"
+]
+},
+
+{
+text:"How often does phone use delay your intended bedtime?",
+options:[
+"Never",
+"Sometimes",
+"Often",
+"Almost every day"
+]
+},
+
+{
+text:"Do you usually keep your phone near you while sleeping?",
+options:[
+"Yes",
+"No",
+"Sometimes"
+]
 }
 
 ],
@@ -1057,6 +1250,47 @@ options:[
 "Videos",
 "Other"
 ]
+},
+
+{
+text:"How often do you check notifications immediately?",
+options:[
+"Rarely",
+"Sometimes",
+"Often",
+"Always"
+]
+},
+
+{
+text:"How often does checking your phone make you lose focus?",
+options:[
+"Never",
+"Sometimes",
+"Often",
+"Very often"
+]
+},
+
+{
+text:"Which type of app distracts you the most?",
+options:[
+"Social media",
+"Video apps",
+"Games",
+"Messaging apps",
+"Other"
+]
+},
+
+{
+text:"How difficult is it to return to studying after checking your phone?",
+options:[
+"Not difficult",
+"Slightly difficult",
+"Quite difficult",
+"Very difficult"
+]
 }
 
 ]
@@ -1064,11 +1298,11 @@ options:[
 };
 
 
-/* -----------------------------
-   SCREEN CONTROL
------------------------------ */
+/* =====================================================
+   SCREEN FUNCTION
+===================================================== */
 
-function showScreen(screenId){
+function showScreen(id){
 
 document.querySelectorAll(".screen").forEach(function(screen){
 
@@ -1076,7 +1310,8 @@ screen.classList.remove("active");
 
 });
 
-const target = document.getElementById(screenId);
+const target =
+document.getElementById(id);
 
 if(target){
 
@@ -1089,9 +1324,9 @@ window.scrollTo(0,0);
 }
 
 
-/* -----------------------------
+/* =====================================================
    LOGIN
------------------------------ */
+===================================================== */
 
 function login(){
 
@@ -1127,19 +1362,19 @@ showScreen("welcomeScreen");
 }
 
 
-/* -----------------------------
+/* =====================================================
    GOAL SELECTION
------------------------------ */
+===================================================== */
 
 function toggleGoal(element){
 
-const goal = element.dataset.goal;
+const goal =
+element.dataset.goal;
 
 
-element.classList.toggle("selected");
+if(element.classList.contains("selected")){
 
-
-if(selectedGoals.includes(goal)){
+element.classList.remove("selected");
 
 selectedGoals =
 selectedGoals.filter(function(item){
@@ -1149,6 +1384,8 @@ return item !== goal;
 });
 
 }else{
+
+element.classList.add("selected");
 
 selectedGoals.push(goal);
 
@@ -1161,9 +1398,9 @@ selectedGoals.length + " goal(s) selected";
 }
 
 
-/* -----------------------------
+/* =====================================================
    START QUESTIONS
------------------------------ */
+===================================================== */
 
 function startQuestions(){
 
@@ -1176,8 +1413,6 @@ return;
 }
 
 
-/* Reset old answers */
-
 questions = [];
 
 answers = {};
@@ -1185,25 +1420,19 @@ answers = {};
 currentQuestion = 0;
 
 
-/* Prevent duplicate questions */
+/* Remove duplicate questions */
 
-const seenQuestions = new Set();
+const seen =
+new Set();
 
 
 selectedGoals.forEach(function(goal){
 
-if(!questionBank[goal]){
-
-return;
-
-}
-
-
 questionBank[goal].forEach(function(question){
 
-if(!seenQuestions.has(question.text)){
+if(!seen.has(question.text)){
 
-seenQuestions.add(question.text);
+seen.add(question.text);
 
 questions.push({
 
@@ -1220,43 +1449,29 @@ options:[...question.options]
 });
 
 
-/* Safety check */
-
 if(questions.length === 0){
 
-alert("No questions are available for the selected goals.");
+alert("No questions are available.");
 
 return;
 
 }
 
 
-/* Open question screen */
-
 showScreen("questionScreen");
-
-
-/* Display FIRST question */
 
 renderQuestion();
 
 }
 
 
-/* -----------------------------
-   RENDER QUESTION
------------------------------ */
+/* =====================================================
+   SHOW QUESTION
+===================================================== */
 
 function renderQuestion(){
 
-if(questions.length === 0){
-
-return;
-
-}
-
-
-const question =
+const q =
 questions[currentQuestion];
 
 
@@ -1268,37 +1483,33 @@ questions.length;
 
 
 document.getElementById("questionText").textContent =
-question.text;
+q.text;
 
 
 const container =
 document.getElementById("optionsContainer");
 
 
-/* Clear previous options */
-
 container.innerHTML = "";
 
 
-/* Create new options */
-
-question.options.forEach(function(optionText){
+q.options.forEach(function(optionText){
 
 const option =
 document.createElement("div");
 
 
-option.className = "option";
+option.className =
+"option";
 
 
-option.textContent = optionText;
+option.textContent =
+optionText;
 
 
-/* Click event */
-
-option.addEventListener("click",function(){
-
-/* Remove previous selection */
+option.addEventListener(
+"click",
+function(){
 
 container
 .querySelectorAll(".option")
@@ -1309,16 +1520,14 @@ item.classList.remove("selected");
 });
 
 
-/* Select current option */
-
 option.classList.add("selected");
 
 
-/* Save answer */
+answers[currentQuestion] =
+optionText;
 
-answers[currentQuestion] = optionText;
-
-});
+}
+);
 
 
 container.appendChild(option);
@@ -1326,7 +1535,7 @@ container.appendChild(option);
 });
 
 
-/* Restore previously selected answer */
+/* Restore answer */
 
 if(answers[currentQuestion]){
 
@@ -1334,7 +1543,10 @@ container
 .querySelectorAll(".option")
 .forEach(function(option){
 
-if(option.textContent === answers[currentQuestion]){
+if(
+option.textContent ===
+answers[currentQuestion]
+){
 
 option.classList.add("selected");
 
@@ -1347,18 +1559,20 @@ option.classList.add("selected");
 
 /* Progress */
 
-const percentage =
+const progress =
 ((currentQuestion + 1) /
 questions.length) * 100;
 
 
 document.getElementById("questionProgress").style.width =
-percentage + "%";
+progress + "%";
 
 
-/* Button text */
+/* Button */
 
-if(currentQuestion === questions.length - 1){
+if(
+currentQuestion === questions.length - 1
+){
 
 document.getElementById("nextButton").textContent =
 "Finish Analysis →";
@@ -1373,13 +1587,11 @@ document.getElementById("nextButton").textContent =
 }
 
 
-/* -----------------------------
+/* =====================================================
    NEXT QUESTION
------------------------------ */
+===================================================== */
 
 function nextQuestion(){
-
-/* Make sure answer exists */
 
 if(!answers[currentQuestion]){
 
@@ -1390,9 +1602,10 @@ return;
 }
 
 
-/* Move forward */
-
-if(currentQuestion < questions.length - 1){
+if(
+currentQuestion <
+questions.length - 1
+){
 
 currentQuestion++;
 
@@ -1407,9 +1620,95 @@ runAnalysis();
 }
 
 
-/* -----------------------------
+/* =====================================================
+   CALCULATE DIGITAL BALANCE SCORE
+===================================================== */
+
+function calculateScore(){
+
+let total = 0;
+
+let count = 0;
+
+
+Object.values(answers).forEach(function(answer){
+
+count++;
+
+
+/* Higher score = better digital balance */
+
+if(
+answer === "Never" ||
+answer === "Rarely" ||
+answer === "Very satisfied" ||
+answer === "Very balanced" ||
+answer === "Almost always" ||
+answer === "Not at all" ||
+answer === "No" ||
+answer === "Not difficult"
+){
+
+total += 100;
+
+}
+
+else if(
+answer === "Sometimes" ||
+answer === "Satisfied" ||
+answer === "Mostly balanced" ||
+answer === "Often" ||
+answer === "A little" ||
+answer === "Slightly difficult"
+){
+
+total += 75;
+
+}
+
+else if(
+answer === "Neutral" ||
+answer === "Sometimes"
+){
+
+total += 60;
+
+}
+
+else if(
+answer === "Quite a lot" ||
+answer === "Quite difficult" ||
+answer === "Somewhat unbalanced"
+){
+
+total += 40;
+
+}
+
+else{
+
+total += 25;
+
+}
+
+});
+
+
+if(count === 0){
+
+return 0;
+
+}
+
+
+return Math.round(total / count);
+
+}
+
+
+/* =====================================================
    ANALYSIS
------------------------------ */
+===================================================== */
 
 function runAnalysis(){
 
@@ -1424,7 +1723,8 @@ const message =
 document.getElementById("analysisMessage");
 
 
-progress.style.width = "0%";
+progress.style.width =
+"0%";
 
 
 message.textContent =
@@ -1433,44 +1733,59 @@ message.textContent =
 
 setTimeout(function(){
 
-progress.style.width = "30%";
+progress.style.width =
+"25%";
+
+message.textContent =
+"Processing your digital habits...";
 
 },300);
 
 
 setTimeout(function(){
 
-progress.style.width = "60%";
+progress.style.width =
+"50%";
 
 message.textContent =
-"Finding patterns in your digital habits...";
+"Finding patterns in your responses...";
 
 },700);
 
 
 setTimeout(function(){
 
-progress.style.width = "85%";
+progress.style.width =
+"75%";
 
 message.textContent =
-"Preparing your personalised summary...";
+"Calculating your digital balance indicator...";
 
 },1100);
 
 
 setTimeout(function(){
 
-progress.style.width = "100%";
+progress.style.width =
+"100%";
 
 message.textContent =
 "Analysis complete!";
 
-},1450);
+},1500);
 
+
+/* IMPORTANT:
+   Show result after analysis */
 
 setTimeout(function(){
 
-saveHistory();
+const score =
+calculateScore();
+
+
+document.getElementById("resultScore").textContent =
+score + "/100";
 
 
 document.getElementById("resultGoals").textContent =
@@ -1482,19 +1797,22 @@ questions.length;
 
 
 document.getElementById("resultText").textContent =
-"You completed your DigitalBalance AI analysis. Your responses can now be used to identify patterns in screen time, study habits, night usage and digital distractions.";
+"Your DigitalBalance AI analysis is complete. Your responses provide a snapshot of your current digital-use patterns. You can use this as a starting point for understanding your habits.";
+
+
+saveHistory();
 
 
 showScreen("resultScreen");
 
-},1800);
+},2000);
 
 }
 
 
-/* -----------------------------
-   HISTORY KEY
------------------------------ */
+/* =====================================================
+   HISTORY
+===================================================== */
 
 function getHistoryKey(){
 
@@ -1504,15 +1822,13 @@ currentUsername.toLowerCase();
 }
 
 
-/* -----------------------------
-   SAVE HISTORY
------------------------------ */
-
 function saveHistory(){
 
 const history =
 JSON.parse(
-localStorage.getItem(getHistoryKey()) || "[]"
+localStorage.getItem(
+getHistoryKey()
+) || "[]"
 );
 
 
@@ -1524,7 +1840,9 @@ time:new Date().toLocaleTimeString(),
 
 goals:selectedGoals.length,
 
-questions:questions.length
+questions:questions.length,
+
+score:calculateScore()
 
 };
 
@@ -1533,19 +1851,12 @@ history.push(record);
 
 
 localStorage.setItem(
-
 getHistoryKey(),
-
 JSON.stringify(history)
-
 );
 
 }
 
-
-/* -----------------------------
-   OPEN HISTORY
------------------------------ */
 
 function openHistory(){
 
@@ -1556,15 +1867,13 @@ showScreen("historyScreen");
 }
 
 
-/* -----------------------------
-   LOAD HISTORY
------------------------------ */
-
 function loadHistory(){
 
 const history =
 JSON.parse(
-localStorage.getItem(getHistoryKey()) || "[]"
+localStorage.getItem(
+getHistoryKey()
+) || "[]"
 );
 
 
@@ -1614,7 +1923,9 @@ record.time +
 record.goals +
 " goal(s) • " +
 record.questions +
-" questions answered" +
+" questions • " +
+record.score +
+"/100 indicator" +
 "</span>";
 
 
@@ -1624,10 +1935,6 @@ container.appendChild(div);
 
 }
 
-
-/* -----------------------------
-   CLEAR HISTORY
------------------------------ */
 
 function clearHistory(){
 
@@ -1646,9 +1953,9 @@ loadHistory();
 }
 
 
-/* -----------------------------
+/* =====================================================
    THEME
------------------------------ */
+===================================================== */
 
 function toggleTheme(){
 
@@ -1668,13 +1975,10 @@ document.body.classList.contains("dark")
 }
 
 
-/* -----------------------------
-   LOAD SAVED THEME
------------------------------ */
-
 if(
-localStorage.getItem("digitalBalanceTheme")
-=== "dark"
+localStorage.getItem(
+"digitalBalanceTheme"
+) === "dark"
 ){
 
 document.body.classList.add("dark");
@@ -1683,18 +1987,16 @@ document.body.classList.add("dark");
 
 
 /* =====================================================
-   BUTTON EVENTS
+   BUTTON CONNECTIONS
 ===================================================== */
-
-
-/* Login */
 
 document
 .getElementById("loginButton")
-.addEventListener("click",login);
+.addEventListener(
+"click",
+login
+);
 
-
-/* Welcome */
 
 document
 .getElementById("welcomeButton")
@@ -1708,8 +2010,6 @@ showScreen("dashboardScreen");
 );
 
 
-/* Theme */
-
 document
 .getElementById("themeButton")
 .addEventListener(
@@ -1717,8 +2017,6 @@ document
 toggleTheme
 );
 
-
-/* Goal cards */
 
 document
 .querySelectorAll(".goal")
@@ -1736,8 +2034,6 @@ toggleGoal(goal);
 });
 
 
-/* Start questions */
-
 document
 .getElementById("startButton")
 .addEventListener(
@@ -1746,8 +2042,6 @@ startQuestions
 );
 
 
-/* Next */
-
 document
 .getElementById("nextButton")
 .addEventListener(
@@ -1755,8 +2049,6 @@ document
 nextQuestion
 );
 
-
-/* Exit questions */
 
 document
 .getElementById("exitQuestionButton")
@@ -1770,8 +2062,6 @@ showScreen("dashboardScreen");
 );
 
 
-/* History */
-
 document
 .getElementById("historyButton")
 .addEventListener(
@@ -1779,8 +2069,6 @@ document
 openHistory
 );
 
-
-/* History back */
 
 document
 .getElementById("historyBackButton")
@@ -1794,8 +2082,6 @@ showScreen("dashboardScreen");
 );
 
 
-/* Clear history */
-
 document
 .getElementById("clearHistoryButton")
 .addEventListener(
@@ -1803,8 +2089,6 @@ document
 clearHistory
 );
 
-
-/* Result back */
 
 document
 .getElementById("resultDashboardButton")
@@ -1818,7 +2102,7 @@ showScreen("dashboardScreen");
 );
 
 
-/* Enter key on login */
+/* Enter key for login */
 
 document
 .getElementById("password")
