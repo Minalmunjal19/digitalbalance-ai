@@ -13,24 +13,30 @@
 <style>
 
 :root {
-    --bg: #f5f7ff;
+    --bg: #f5f7fb;
     --card: #ffffff;
-    --text: #20233a;
-    --muted: #6d7185;
-    --primary: #6c63ff;
-    --primary-dark: #554bea;
-    --border: #e5e7f2;
-    --shadow: 0 10px 30px rgba(60, 65, 120, 0.10);
+    --text: #172033;
+    --muted: #6b7280;
+    --primary: #5b5ce2;
+    --primary-dark: #4546c7;
+    --border: #e5e7eb;
+    --soft: #eef0ff;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --shadow: 0 10px 30px rgba(0,0,0,0.07);
 }
 
 body.dark {
-    --bg: #11131f;
-    --card: #1c1f2e;
-    --text: #f4f5ff;
-    --muted: #aeb2c5;
-    --primary: #8279ff;
-    --primary-dark: #7067f0;
-    --border: #303447;
+    --bg: #11131a;
+    --card: #1b1e27;
+    --text: #f4f6fb;
+    --muted: #a7adbd;
+    --primary: #8586ff;
+    --primary-dark: #7071ee;
+    --border: #303442;
+    --soft: #272a42;
+    --success: #4ade80;
+    --danger: #f87171;
     --shadow: 0 10px 30px rgba(0,0,0,0.25);
 }
 
@@ -43,80 +49,84 @@ body {
     font-family: "Poppins", sans-serif;
     background: var(--bg);
     color: var(--text);
-    transition: 0.3s;
+    transition: 0.25s;
 }
 
-.app {
-    width: 100%;
-    max-width: 1100px;
-    margin: auto;
-    padding: 20px;
+button,
+input {
+    font-family: inherit;
 }
 
 .screen {
     display: none;
-    min-height: 90vh;
+    min-height: 100vh;
 }
 
 .screen.active {
     display: block;
 }
 
-/* ---------- COMMON ---------- */
-
 .center-screen {
-    display: flex;
+    display: none;
+    min-height: 100vh;
     align-items: center;
     justify-content: center;
-    min-height: 90vh;
+    padding: 20px;
+}
+
+.center-screen.active {
+    display: flex;
 }
 
 .card {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 24px;
+    border-radius: 22px;
     box-shadow: var(--shadow);
 }
 
-/* ---------- LOGIN ---------- */
-
 .login-card {
     width: 100%;
-    max-width: 440px;
-    padding: 40px 30px;
-    text-align: center;
+    max-width: 430px;
+    padding: 35px;
 }
 
 .logo {
-    font-size: 52px;
-    margin-bottom: 10px;
+    font-size: 42px;
+    text-align: center;
+    margin-bottom: 8px;
 }
 
-.login-card h1,
-.welcome-card h1 {
-    margin: 5px 0;
-    font-size: 30px;
+.logo-text {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
 }
 
 .tagline {
+    text-align: center;
     color: var(--muted);
     margin-bottom: 30px;
 }
 
-.login-card h2 {
-    margin-bottom: 20px;
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 7px;
 }
 
 .input {
     width: 100%;
-    padding: 15px;
-    margin: 8px 0;
+    padding: 13px 15px;
     border: 1px solid var(--border);
     border-radius: 12px;
     background: var(--bg);
     color: var(--text);
-    font-family: inherit;
-    font-size: 15px;
     outline: none;
 }
 
@@ -124,19 +134,21 @@ body {
     border-color: var(--primary);
 }
 
-.primary-btn {
-    width: 100%;
+.primary-btn,
+.secondary-btn {
     border: none;
-    border-radius: 14px;
-    padding: 15px 20px;
-    margin-top: 15px;
+    border-radius: 12px;
+    padding: 13px 18px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.primary-btn {
     background: var(--primary);
     color: white;
-    font-family: inherit;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s;
+    width: 100%;
 }
 
 .primary-btn:hover {
@@ -145,173 +157,184 @@ body {
 }
 
 .secondary-btn {
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 12px 18px;
-    background: var(--card);
-    color: var(--text);
-    font-family: inherit;
-    cursor: pointer;
+    background: var(--soft);
+    color: var(--primary);
 }
 
-.link-btn {
+.secondary-btn:hover {
+    transform: translateY(-1px);
+}
+
+.text-btn {
     border: none;
     background: none;
     color: var(--primary);
-    font-family: inherit;
-    font-weight: 600;
     cursor: pointer;
-}
-
-.privacy-note {
-    color: var(--muted);
-    font-size: 12px;
-    margin-top: 22px;
-}
-
-/* ---------- WELCOME ---------- */
-
-.welcome-card {
-    width: 100%;
-    max-width: 650px;
-    margin: auto;
-    padding: 55px 30px;
-    text-align: center;
-}
-
-.badge {
-    display: inline-block;
-    margin: 18px 0;
-    padding: 8px 14px;
-    border-radius: 30px;
-    background: rgba(108, 99, 255, 0.10);
-    color: var(--primary);
-    font-size: 13px;
     font-weight: 600;
 }
-
-.welcome-text {
-    max-width: 600px;
-    margin: 30px auto;
-}
-
-.welcome-text p {
-    color: var(--muted);
-}
-
-/* ---------- HEADER ---------- */
 
 .topbar {
+    padding: 18px 5%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 25px;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .brand {
-    font-size: 22px;
     font-weight: 700;
+    font-size: 20px;
 }
 
-.header-actions {
+.top-actions {
     display: flex;
     gap: 8px;
 }
 
-/* ---------- DASHBOARD ---------- */
+.icon-btn {
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    cursor: pointer;
+}
 
-.dashboard-heading {
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 35px 20px 60px;
+}
+
+.hero {
+    padding: 35px;
     margin-bottom: 25px;
+    background: linear-gradient(135deg, var(--card), var(--soft));
 }
 
-.dashboard-heading h2 {
-    margin-bottom: 5px;
+.hero h1 {
+    margin: 0 0 8px;
+    font-size: 32px;
 }
 
-.dashboard-heading p {
+.hero p {
     color: var(--muted);
+    margin: 0;
 }
 
 .section-title {
     margin: 30px 0 15px;
 }
 
-.goal-grid,
-.tool-grid {
+.section-title h2 {
+    margin: 0;
+    font-size: 21px;
+}
+
+.section-title p {
+    margin: 5px 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.goals-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
 }
 
-.goal-card,
-.tool-card {
-    background: var(--card);
-    border: 2px solid var(--border);
-    border-radius: 18px;
+.goal-card {
     padding: 22px;
     cursor: pointer;
     transition: 0.2s;
+    border: 2px solid var(--border);
 }
 
-.goal-card:hover,
-.tool-card:hover {
+.goal-card:hover {
     transform: translateY(-3px);
-    border-color: var(--primary);
 }
 
 .goal-card.selected {
     border-color: var(--primary);
-    background: rgba(108, 99, 255, 0.08);
+    background: var(--soft);
 }
 
-.goal-icon,
-.tool-icon {
+.goal-icon {
     font-size: 30px;
+    margin-bottom: 12px;
 }
 
-.goal-card h3,
-.tool-card h3 {
-    margin: 10px 0 5px;
+.goal-card h3 {
+    margin: 0 0 6px;
 }
 
-.goal-card p,
-.tool-card p {
+.goal-card p {
     color: var(--muted);
     font-size: 13px;
     margin: 0;
 }
 
-.analyze-area {
+.dashboard-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.tool-card {
+    padding: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.tool-card:hover {
+    transform: translateY(-3px);
+}
+
+.tool-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.tool-card h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+}
+
+.tool-card p {
+    color: var(--muted);
+    font-size: 12px;
+    margin: 0;
+}
+
+.start-box {
     margin-top: 25px;
+    padding: 25px;
     text-align: center;
 }
 
-/* ---------- TOOL / ANALYSIS ---------- */
-
-.content-card {
-    padding: 30px;
-    margin-top: 20px;
+.start-box p {
+    color: var(--muted);
 }
 
-.back-btn {
-    margin-bottom: 20px;
+.start-btn {
+    max-width: 300px;
+    margin: auto;
 }
 
 .analysis-box {
     text-align: center;
-    padding: 30px 10px;
-}
-
-.analysis-icon {
-    font-size: 50px;
+    padding: 40px;
 }
 
 .progress-bar {
-    width: 100%;
     height: 12px;
-    border-radius: 20px;
     background: var(--border);
+    border-radius: 20px;
     overflow: hidden;
     margin: 25px 0;
 }
@@ -320,59 +343,180 @@ body {
     height: 100%;
     width: 0%;
     background: var(--primary);
-    border-radius: 20px;
-    transition: width 1.5s;
+    transition: width 0.6s;
 }
 
-.stat-grid {
+.stats-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
-    margin-top: 25px;
 }
 
-.stat {
-    padding: 20px;
-    background: var(--bg);
-    border-radius: 16px;
-    text-align: center;
+.stat-card {
+    padding: 22px;
 }
 
-.stat strong {
-    display: block;
+.stat-number {
     font-size: 28px;
-    color: var(--primary);
+    font-weight: 700;
 }
 
-.stat span {
+.stat-label {
     color: var(--muted);
     font-size: 13px;
 }
 
-/* ---------- RESPONSIVE ---------- */
+.history-card {
+    padding: 20px;
+    margin-bottom: 12px;
+}
 
-@media (max-width: 650px) {
+.history-date {
+    font-weight: 600;
+}
 
-    .app {
-        padding: 14px;
+.history-info {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--muted);
+}
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.progress-chart {
+    display: flex;
+    align-items: end;
+    gap: 12px;
+    height: 230px;
+    padding: 20px;
+    overflow-x: auto;
+}
+
+.chart-column {
+    min-width: 38px;
+    height: 190px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+}
+
+.chart-bar {
+    width: 28px;
+    min-height: 5px;
+    background: var(--primary);
+    border-radius: 8px 8px 3px 3px;
+}
+
+.chart-label {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 7px;
+}
+
+.tool-content {
+    padding: 30px;
+}
+
+.back-row {
+    margin-bottom: 20px;
+}
+
+.info-box {
+    padding: 20px;
+    margin-top: 20px;
+    background: var(--soft);
+    border-radius: 16px;
+}
+
+.privacy-list {
+    line-height: 2;
+    color: var(--muted);
+}
+
+.welcome-card {
+    width: 100%;
+    max-width: 700px;
+    padding: 45px;
+    text-align: center;
+}
+
+.welcome-card h1 {
+    font-size: 34px;
+}
+
+.welcome-card p {
+    color: var(--muted);
+}
+
+@media (max-width: 850px) {
+
+    .goals-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .goal-grid,
-    .tool-grid,
-    .stat-grid {
+    .dashboard-actions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+
+    .login-card {
+        padding: 25px;
+    }
+
+    .hero {
+        padding: 25px;
+    }
+
+    .hero h1 {
+        font-size: 25px;
+    }
+
+    .goals-grid,
+    .dashboard-actions,
+    .stats-grid {
         grid-template-columns: 1fr;
     }
 
-    .login-card,
+    .container {
+        padding: 25px 15px 50px;
+    }
+
     .welcome-card {
-        padding: 35px 20px;
+        padding: 30px 20px;
     }
-
-    .topbar {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
 }
 
 </style>
@@ -380,56 +524,49 @@ body {
 
 <body>
 
-<div class="app">
-
 <!-- ================= LOGIN ================= -->
 
-<section id="loginScreen" class="screen active">
+<section id="loginScreen" class="screen active center-screen">
 
-    <div class="center-screen">
+    <div class="login-card card">
 
-        <div class="card login-card">
+        <div class="logo">📱</div>
 
-            <div class="logo">📱⚖️</div>
+        <div class="logo-text">
+            DigitalBalance AI
+        </div>
 
-            <h1>DigitalBalance AI</h1>
+        <div class="tagline">
+            Understand your digital life. Balance it better.
+        </div>
 
-            <p class="tagline">
-                Understand your digital life. Balance it better.
-            </p>
-
-            <h2>Welcome Back 👋</h2>
-
+        <div class="input-group">
+            <label>Username</label>
             <input
                 class="input"
                 type="text"
                 id="username"
                 placeholder="Enter your username"
             >
+        </div>
 
+        <div class="input-group">
+            <label>Password</label>
             <input
                 class="input"
                 type="password"
                 id="password"
                 placeholder="Enter your password"
             >
-
-            <button class="primary-btn" onclick="login()">
-                Login →
-            </button>
-
-            <p>
-                New here?
-                <button class="link-btn" onclick="createAccount()">
-                    Create Account
-                </button>
-            </p>
-
-            <p class="privacy-note">
-                🔐 You control the information you enter.
-            </p>
-
         </div>
+
+        <button class="primary-btn" onclick="login()">
+            Login →
+        </button>
+
+        <p style="text-align:center;color:var(--muted);font-size:13px;margin-top:20px;">
+            Demo login — enter any username and password.
+        </p>
 
     </div>
 
@@ -438,46 +575,26 @@ body {
 
 <!-- ================= WELCOME ================= -->
 
-<section id="welcomeScreen" class="screen">
+<section id="welcomeScreen" class="screen center-screen">
 
-    <div class="center-screen">
+    <div class="welcome-card card">
 
-        <div class="card welcome-card">
+        <div style="font-size:50px;">🌱</div>
 
-            <div class="logo">📱⚖️</div>
+        <h1 id="welcomeGreeting">
+            Welcome! 👋
+        </h1>
 
-            <h1>DigitalBalance AI</h1>
+        <p>
+            DigitalBalance AI helps you understand your digital habits,
+            discover patterns and build better digital balance.
+        </p>
 
-            <p class="tagline">
-                Understand your digital life. Balance it better.
-            </p>
+        <br>
 
-            <div class="badge">
-                AI • Python • Data Analytics • Privacy First
-            </div>
-
-            <div class="welcome-text">
-
-                <h2 id="welcomeGreeting">
-                    Welcome! 👋
-                </h2>
-
-                <p>
-                    Analyse your digital habits, discover patterns,
-                    and understand your screen usage.
-                </p>
-
-            </div>
-
-            <button class="primary-btn" onclick="openDashboard()">
-                Get Started →
-            </button>
-
-            <p class="privacy-note">
-                🔐 Privacy-first • No hidden monitoring
-            </p>
-
-        </div>
+        <button class="primary-btn" onclick="openDashboard()">
+            Go to Dashboard →
+        </button>
 
     </div>
 
@@ -494,119 +611,179 @@ body {
             📱 DigitalBalance AI
         </div>
 
-        <div class="header-actions">
+        <div class="top-actions">
 
-            <button class="secondary-btn" onclick="toggleTheme()">
-                🌙 Theme
+            <button class="icon-btn" onclick="toggleTheme()" title="Theme">
+                🌙
             </button>
 
-            <button class="secondary-btn" onclick="logout()">
-                Logout
+            <button class="icon-btn" onclick="logout()" title="Logout">
+                ↪
             </button>
 
         </div>
 
     </div>
 
+    <div class="container">
 
-    <div class="dashboard-heading">
+        <div class="hero card">
 
-        <h2 id="dashboardGreeting">
-            What would you like to analyze?
-        </h2>
+            <h1 id="dashboardGreeting">
+                Hi 👋
+            </h1>
 
-        <p>
-            Select one or more areas of your digital life.
-        </p>
+            <p>
+                Let's understand your digital life and find patterns
+                that can help you create a better balance.
+            </p>
 
-    </div>
-
-
-    <h3 class="section-title">
-        🎯 Choose Your Goals
-    </h3>
-
-
-    <div class="goal-grid">
-
-        <div class="goal-card" onclick="selectGoal(this)">
-            <div class="goal-icon">📱</div>
-            <h3>Screen Time</h3>
-            <p>Understand your daily screen usage.</p>
         </div>
 
 
-        <div class="goal-card" onclick="selectGoal(this)">
-            <div class="goal-icon">⚖️</div>
-            <h3>Digital Balance</h3>
-            <p>Explore balance between different activities.</p>
+        <!-- GOALS -->
+
+        <div class="section-title">
+
+            <h2>🎯 Choose Your Goals</h2>
+
+            <p>
+                Select one or more areas you want DigitalBalance AI to analyse.
+            </p>
+
         </div>
 
 
-        <div class="goal-card" onclick="selectGoal(this)">
-            <div class="goal-icon">📚</div>
-            <h3>Study & Screen</h3>
-            <p>Analyse study-related screen usage.</p>
+        <div class="goals-grid">
+
+            <div class="goal-card card" onclick="selectGoal(this)">
+                <div class="goal-icon">📱</div>
+                <h3>Screen Time</h3>
+                <p>Understand your overall screen-time patterns.</p>
+            </div>
+
+            <div class="goal-card card" onclick="selectGoal(this)">
+                <div class="goal-icon">⚖️</div>
+                <h3>Digital Balance</h3>
+                <p>Explore balance between different digital activities.</p>
+            </div>
+
+            <div class="goal-card card" onclick="selectGoal(this)">
+                <div class="goal-icon">📚</div>
+                <h3>Study & Screen</h3>
+                <p>Understand your study-related screen usage.</p>
+            </div>
+
+            <div class="goal-card card" onclick="selectGoal(this)">
+                <div class="goal-icon">🌙</div>
+                <h3>Night Usage</h3>
+                <p>Analyse your late-night digital habits.</p>
+            </div>
+
+            <div class="goal-card card" onclick="selectGoal(this)">
+                <div class="goal-icon">🔔</div>
+                <h3>Distraction Analyzer</h3>
+                <p>Understand notifications and digital distractions.</p>
+            </div>
+
         </div>
 
 
-        <div class="goal-card" onclick="selectGoal(this)">
-            <div class="goal-icon">🌙</div>
-            <h3>Night Usage</h3>
-            <p>Understand your late-night digital habits.</p>
+        <div class="start-box card">
+
+            <h3>
+                Selected Goals:
+                <span id="goalCount">0</span>
+            </h3>
+
+            <p>
+                Select at least one goal to begin your analysis.
+            </p>
+
+            <button
+                class="primary-btn start-btn"
+                onclick="startAnalysis()"
+            >
+                Start Analysis →
+            </button>
+
         </div>
 
 
-        <div class="goal-card" onclick="selectGoal(this)">
-            <div class="goal-icon">🔔</div>
-            <h3>Distraction Analyzer</h3>
-            <p>Explore notifications and digital distractions.</p>
-        </div>
+        <!-- TOOLS -->
 
-    </div>
+        <div class="section-title">
 
+            <h2>🛠️ Your DigitalBalance Tools</h2>
 
-    <div class="analyze-area">
+            <p>
+                Explore your progress, history and personalised tools.
+            </p>
 
-        <button class="primary-btn" onclick="startAnalysis()">
-            📊 Analyze My Digital Life
-        </button>
-
-    </div>
-
-
-    <h3 class="section-title">
-        🛠️ Tools
-    </h3>
-
-
-    <div class="tool-grid">
-
-        <div class="tool-card" onclick="openTool('progress')">
-            <div class="tool-icon">📈</div>
-            <h3>My Progress</h3>
-            <p>View your progress over time.</p>
         </div>
 
 
-        <div class="tool-card" onclick="openTool('chatbot')">
-            <div class="tool-icon">💬</div>
-            <h3>Ask DigitalBalance AI</h3>
-            <p>Ask questions about your digital habits.</p>
-        </div>
+        <div class="dashboard-actions">
+
+            <div
+                class="tool-card card"
+                onclick="openTool('progress')"
+            >
+                <div class="tool-icon">📈</div>
+                <h3>My Progress</h3>
+                <p>
+                    Track your digital habits across days, weeks and months.
+                </p>
+            </div>
 
 
-        <div class="tool-card" onclick="openTool('whatif')">
-            <div class="tool-icon">🧪</div>
-            <h3>What-If Lab</h3>
-            <p>Explore how changing a habit could affect usage.</p>
-        </div>
+            <div
+                class="tool-card card"
+                onclick="openTool('history')"
+            >
+                <div class="tool-icon">🗂️</div>
+                <h3>History</h3>
+                <p>
+                    View your previous analyses and saved progress.
+                </p>
+            </div>
 
 
-        <div class="tool-card" onclick="openTool('privacy')">
-            <div class="tool-icon">🔐</div>
-            <h3>Privacy & AI Ethics</h3>
-            <p>Learn how your information is handled.</p>
+            <div
+                class="tool-card card"
+                onclick="openTool('chatbot')"
+            >
+                <div class="tool-icon">💬</div>
+                <h3>Ask DigitalBalance AI</h3>
+                <p>
+                    Ask questions about your digital habits.
+                </p>
+            </div>
+
+
+            <div
+                class="tool-card card"
+                onclick="openTool('whatif')"
+            >
+                <div class="tool-icon">🧪</div>
+                <h3>What-If Lab</h3>
+                <p>
+                    Explore how changing a habit could affect usage.
+                </p>
+            </div>
+
+
+            <div
+                class="tool-card card"
+                onclick="openTool('privacy')"
+            >
+                <div class="tool-icon">🔐</div>
+                <h3>Privacy & AI Ethics</h3>
+                <p>
+                    Learn how your data is handled responsibly.
+                </p>
+            </div>
+
         </div>
 
     </div>
@@ -624,47 +801,47 @@ body {
             📊 Digital Analysis
         </div>
 
+        <button class="secondary-btn" onclick="backToDashboard()">
+            ← Dashboard
+        </button>
+
     </div>
 
-    <button class="secondary-btn back-btn" onclick="backToDashboard()">
-        ← Back to Dashboard
-    </button>
 
+    <div class="container">
 
-    <div class="card content-card">
+        <div class="analysis-box card">
 
-        <div class="analysis-box">
-
-            <div class="analysis-icon">
-                🧠
+            <div style="font-size:50px;">
+                🤖
             </div>
 
-            <h2>Analysing Your Digital Life</h2>
+            <h2>
+                Analysing Your Digital Habits
+            </h2>
 
             <p id="analysisMessage">
-                Processing your selected goals...
+                Finding patterns in your selected digital habits...
             </p>
 
             <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
+
+                <div
+                    class="progress-fill"
+                    id="progressFill"
+                ></div>
+
             </div>
 
-            <div class="stat-grid">
+            <div class="info-box">
 
-                <div class="stat">
-                    <strong id="goalCount">0</strong>
-                    <span>Goals Selected</span>
-                </div>
+                <strong>
+                    Selected goals:
+                </strong>
 
-                <div class="stat">
-                    <strong>AI</strong>
-                    <span>Analysis Engine</span>
-                </div>
-
-                <div class="stat">
-                    <strong>100%</strong>
-                    <span>User Controlled</span>
-                </div>
+                <span id="analysisGoalCount">
+                    0
+                </span>
 
             </div>
 
@@ -675,45 +852,282 @@ body {
 </section>
 
 
-<!-- ================= TOOL ================= -->
+<!-- ================= TOOL SCREEN ================= -->
 
 <section id="toolScreen" class="screen">
 
     <div class="topbar">
 
         <div class="brand">
-            🛠️ DigitalBalance AI
+            📱 DigitalBalance AI
         </div>
+
+        <button class="secondary-btn" onclick="backToDashboard()">
+            ← Dashboard
+        </button>
 
     </div>
 
-    <button class="secondary-btn back-btn" onclick="backToDashboard()">
-        ← Back to Dashboard
-    </button>
+
+    <div class="container">
+
+        <div class="back-row">
+            <button
+                class="secondary-btn"
+                onclick="backToDashboard()"
+            >
+                ← Back to Dashboard
+            </button>
+        </div>
 
 
-    <div class="card content-card">
+        <div class="tool-content card">
 
-        <h2 id="toolTitle">
-            Tool
-        </h2>
-
-        <p id="toolDescription">
-            Your selected tool will appear here.
-        </p>
-
-        <div class="analysis-box">
-
-            <div class="analysis-icon">
-                🚀
+            <div style="font-size:42px;" id="toolIcon">
+                📈
             </div>
 
-            <h3>Feature Coming Next</h3>
+            <h1 id="toolTitle">
+                My Progress
+            </h1>
 
-            <p>
-                This section will be connected to the
-                DigitalBalance AI analysis engine.
+            <p
+                id="toolDescription"
+                style="color:var(--muted);"
+            >
+                Track your digital habits.
             </p>
+
+
+            <!-- PROGRESS -->
+
+            <div id="progressContent">
+
+                <div class="tabs">
+
+                    <button
+                        class="tab-btn active"
+                        id="weeklyTab"
+                        onclick="showProgress('weekly')"
+                    >
+                        Weekly
+                    </button>
+
+                    <button
+                        class="tab-btn"
+                        id="monthlyTab"
+                        onclick="showProgress('monthly')"
+                    >
+                        Monthly
+                    </button>
+
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <div class="stat-card card">
+                        <div
+                            class="stat-number"
+                            id="totalAnalyses"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-label">
+                            Total Analyses
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card card">
+                        <div
+                            class="stat-number"
+                            id="thisWeek"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-label">
+                            This Week
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card card">
+                        <div
+                            class="stat-number"
+                            id="thisMonth"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-label">
+                            This Month
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card card">
+                        <div
+                            class="stat-number"
+                            id="activeDays"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-label">
+                            Active Days
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <br>
+
+                <div class="card" style="padding:20px;">
+
+                    <h3>
+                        📊 Progress Overview
+                    </h3>
+
+                    <div
+                        class="progress-chart"
+                        id="progressChart"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- HISTORY -->
+
+            <div id="historyContent" style="display:none;">
+
+                <h2>
+                    🗂️ Your Saved History
+                </h2>
+
+                <p style="color:var(--muted);">
+                    Your analysis sessions are saved on this browser
+                    so you can review your progress later.
+                </p>
+
+                <div id="historyList"></div>
+
+                <br>
+
+                <button
+                    class="secondary-btn"
+                    onclick="clearHistory()"
+                >
+                    Clear History
+                </button>
+
+            </div>
+
+
+            <!-- CHATBOT -->
+
+            <div id="chatbotContent" style="display:none;">
+
+                <h2>
+                    💬 Ask DigitalBalance AI
+                </h2>
+
+                <div class="info-box">
+
+                    <p>
+                        The AI chatbot will be connected here in the
+                        next development stage.
+                    </p>
+
+                    <p>
+                        It will answer questions about your entered
+                        digital-usage patterns and provide personalised,
+                        non-medical guidance.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- WHAT IF -->
+
+            <div id="whatifContent" style="display:none;">
+
+                <h2>
+                    🧪 What-If Lab
+                </h2>
+
+                <div class="info-box">
+
+                    <p>
+                        Soon you will be able to change a digital habit
+                        and explore how that change could affect your
+                        usage pattern.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRIVACY -->
+
+            <div id="privacyContent" style="display:none;">
+
+                <h2>
+                    🔐 Privacy & AI Ethics
+                </h2>
+
+                <ul class="privacy-list">
+
+                    <li>
+                        Privacy — You decide what information to enter.
+                    </li>
+
+                    <li>
+                        Transparency — The app explains its calculations.
+                    </li>
+
+                    <li>
+                        Fairness — The system should avoid unfair assumptions.
+                    </li>
+
+                    <li>
+                        Human Control — You remain in control of your data.
+                    </li>
+
+                    <li>
+                        Responsible AI — The app does not provide medical diagnosis.
+                    </li>
+
+                    <li>
+                        No secret monitoring or hidden tracking.
+                    </li>
+
+                </ul>
+
+                <div class="info-box">
+
+                    <strong>
+                        Important:
+                    </strong>
+
+                    <p>
+                        DigitalBalance AI is an educational digital-wellbeing
+                        project. Its score and insights are based only on
+                        information entered by the user and are not medical
+                        or psychological assessments.
+                    </p>
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -721,16 +1135,20 @@ body {
 
 </section>
 
-</div>
-
 
 <script>
+
+/* =========================================================
+   DIGITALBALANCE AI
+   MAIN JAVASCRIPT
+========================================================= */
+
 
 let selectedGoals = 0;
 let currentUsername = "";
 
 
-/* ---------- LOGIN ---------- */
+/* ================= LOGIN ================= */
 
 function login() {
 
@@ -740,37 +1158,37 @@ function login() {
     const password =
         document.getElementById("password").value.trim();
 
+
     if (username === "" || password === "") {
 
-        alert("Please enter your username and password.");
+        alert(
+            "Please enter your username and password."
+        );
 
         return;
     }
 
+
     currentUsername = username;
 
-    document.getElementById("welcomeGreeting").textContent =
+
+    document.getElementById(
+        "welcomeGreeting"
+    ).textContent =
         "Welcome, " + currentUsername + "! 👋";
 
-    document.getElementById("dashboardGreeting").textContent =
+
+    document.getElementById(
+        "dashboardGreeting"
+    ).textContent =
         "Hi, " + currentUsername + " 👋";
+
 
     showScreen("welcomeScreen");
 }
 
 
-/* ---------- CREATE ACCOUNT ---------- */
-
-function createAccount() {
-
-    alert(
-        "Account creation will be connected to a real backend in a future version."
-    );
-
-}
-
-
-/* ---------- SCREEN CONTROL ---------- */
+/* ================= SCREEN CONTROL ================= */
 
 function showScreen(id) {
 
@@ -782,15 +1200,15 @@ function showScreen(id) {
 
         });
 
+
     document
         .getElementById(id)
         .classList.add("active");
 
+
     window.scrollTo(0, 0);
 }
 
-
-/* ---------- DASHBOARD ---------- */
 
 function openDashboard() {
 
@@ -806,97 +1224,280 @@ function backToDashboard() {
 }
 
 
-/* ---------- GOALS ---------- */
+/* ================= GOALS ================= */
 
 function selectGoal(card) {
 
     card.classList.toggle("selected");
 
+
     selectedGoals =
-        document.querySelectorAll(".goal-card.selected").length;
+        document.querySelectorAll(
+            ".goal-card.selected"
+        ).length;
+
+
+    document.getElementById(
+        "goalCount"
+    ).textContent =
+        selectedGoals;
+}
+
+
+/* ================= HISTORY STORAGE ================= */
+
+function getHistoryKey() {
+
+    if (!currentUsername) {
+        return "digitalBalanceHistory_guest";
+    }
+
+    return (
+        "digitalBalanceHistory_" +
+        currentUsername.toLowerCase()
+    );
+}
+
+
+function getProgressHistory() {
+
+    return JSON.parse(
+        localStorage.getItem(
+            getHistoryKey()
+        ) || "[]"
+    );
 
 }
 
 
-/* ---------- ANALYSIS ---------- */
+function saveProgress() {
+
+    const history =
+        getProgressHistory();
+
+
+    const now = new Date();
+
+
+    const record = {
+
+        id: Date.now(),
+
+        date:
+            now.toLocaleDateString(),
+
+        time:
+            now.toLocaleTimeString(),
+
+        timestamp:
+            now.toISOString(),
+
+        goals:
+            selectedGoals
+
+    };
+
+
+    history.push(record);
+
+
+    localStorage.setItem(
+        getHistoryKey(),
+        JSON.stringify(history)
+    );
+
+}
+
+
+/* ================= ANALYSIS ================= */
 
 function startAnalysis() {
 
     if (selectedGoals === 0) {
 
-        alert("Please select at least one goal.");
+        alert(
+            "Please select at least one goal."
+        );
 
         return;
     }
 
-    document.getElementById("goalCount").textContent =
+
+    document.getElementById(
+        "analysisGoalCount"
+    ).textContent =
         selectedGoals;
 
-    document.getElementById("analysisMessage").textContent =
+
+    document.getElementById(
+        "analysisMessage"
+    ).textContent =
         "Finding patterns in your selected digital habits...";
+
+
+    document.getElementById(
+        "progressFill"
+    ).style.width =
+        "0%";
+
 
     showScreen("analysisScreen");
 
+
     setTimeout(function() {
 
-        document.getElementById("progressFill").style.width =
+        document.getElementById(
+            "progressFill"
+        ).style.width =
+            "60%";
+
+    }, 300);
+
+
+    setTimeout(function() {
+
+        document.getElementById(
+            "progressFill"
+        ).style.width =
             "100%";
 
-        document.getElementById("analysisMessage").textContent =
-            "Analysis complete! Your personalised insights will appear here.";
 
-    }, 500);
+        document.getElementById(
+            "analysisMessage"
+        ).textContent =
+            "Analysis complete! Your progress has been saved.";
+
+        /*
+           SAVE THE ANALYSIS
+        */
+
+        saveProgress();
+
+
+    }, 900);
+
+
+    setTimeout(function() {
+
+        showScreen("dashboardScreen");
+
+        alert(
+            "Analysis saved successfully! 📈"
+        );
+
+    }, 1200);
 
 }
 
 
-/* ---------- TOOLS ---------- */
+/* ================= TOOLS ================= */
 
 function openTool(tool) {
 
     const title =
-        document.getElementById("toolTitle");
+        document.getElementById(
+            "toolTitle"
+        );
 
     const description =
-        document.getElementById("toolDescription");
+        document.getElementById(
+            "toolDescription"
+        );
+
+    const icon =
+        document.getElementById(
+            "toolIcon"
+        );
+
+
+    hideAllToolContent();
 
 
     if (tool === "progress") {
 
-        title.textContent = "📈 My Progress";
+        title.textContent =
+            "📈 My Progress";
 
         description.textContent =
             "Track your digital habits across days, weeks and months.";
+
+        icon.textContent = "📈";
+
+        document.getElementById(
+            "progressContent"
+        ).style.display = "block";
+
+        updateProgress();
+
+    }
+
+
+    if (tool === "history") {
+
+        title.textContent =
+            "🗂️ History";
+
+        description.textContent =
+            "Review your previous analysis sessions.";
+
+        icon.textContent = "🗂️";
+
+        document.getElementById(
+            "historyContent"
+        ).style.display = "block";
+
+        loadHistory();
 
     }
 
 
     if (tool === "chatbot") {
 
-        title.textContent = "💬 Ask DigitalBalance AI";
+        title.textContent =
+            "💬 Ask DigitalBalance AI";
 
         description.textContent =
-            "Ask questions about your digital habits and get personalised guidance.";
+            "Ask questions about your digital habits.";
+
+        icon.textContent = "💬";
+
+        document.getElementById(
+            "chatbotContent"
+        ).style.display = "block";
 
     }
 
 
     if (tool === "whatif") {
 
-        title.textContent = "🧪 What-If Lab";
+        title.textContent =
+            "🧪 What-If Lab";
 
         description.textContent =
             "Explore how changing a digital habit could affect your usage.";
+
+        icon.textContent = "🧪";
+
+        document.getElementById(
+            "whatifContent"
+        ).style.display = "block";
 
     }
 
 
     if (tool === "privacy") {
 
-        title.textContent = "🔐 Privacy & AI Ethics";
+        title.textContent =
+            "🔐 Privacy & AI Ethics";
 
         description.textContent =
-            "DigitalBalance AI follows privacy, transparency, fairness and human-control principles.";
+            "Learn how DigitalBalance AI handles responsible AI.";
+
+        icon.textContent = "🔐";
+
+        document.getElementById(
+            "privacyContent"
+        ).style.display = "block";
 
     }
 
@@ -906,28 +1507,551 @@ function openTool(tool) {
 }
 
 
-/* ---------- THEME ---------- */
+function hideAllToolContent() {
 
-function toggleTheme() {
+    document.getElementById(
+        "progressContent"
+    ).style.display = "none";
 
-    document.body.classList.toggle("dark");
+
+    document.getElementById(
+        "historyContent"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "chatbotContent"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "whatifContent"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "privacyContent"
+    ).style.display = "none";
 
 }
 
 
-/* ---------- LOGOUT ---------- */
+/* ================= PROGRESS ================= */
+
+function updateProgress() {
+
+    const history =
+        getProgressHistory();
+
+
+    document.getElementById(
+        "totalAnalyses"
+    ).textContent =
+        history.length;
+
+
+    const now = new Date();
+
+
+    const weekStart =
+        new Date(now);
+
+    weekStart.setDate(
+        now.getDate() - 6
+    );
+
+    weekStart.setHours(
+        0, 0, 0, 0
+    );
+
+
+    const monthStart =
+        new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            1
+        );
+
+
+    const weekCount =
+        history.filter(function(item) {
+
+            return new Date(
+                item.timestamp
+            ) >= weekStart;
+
+        }).length;
+
+
+    const monthCount =
+        history.filter(function(item) {
+
+            return new Date(
+                item.timestamp
+            ) >= monthStart;
+
+        }).length;
+
+
+    const uniqueDays =
+        new Set(
+            history.map(function(item) {
+
+                return item.date;
+
+            })
+        ).size;
+
+
+    document.getElementById(
+        "thisWeek"
+    ).textContent =
+        weekCount;
+
+
+    document.getElementById(
+        "thisMonth"
+    ).textContent =
+        monthCount;
+
+
+    document.getElementById(
+        "activeDays"
+    ).textContent =
+        uniqueDays;
+
+
+    showProgress("weekly");
+
+}
+
+
+/* ================= PROGRESS TABS ================= */
+
+function showProgress(type) {
+
+    document.getElementById(
+        "weeklyTab"
+    ).classList.remove("active");
+
+
+    document.getElementById(
+        "monthlyTab"
+    ).classList.remove("active");
+
+
+    if (type === "weekly") {
+
+        document.getElementById(
+            "weeklyTab"
+        ).classList.add("active");
+
+    } else {
+
+        document.getElementById(
+            "monthlyTab"
+        ).classList.add("active");
+
+    }
+
+
+    drawProgressChart(type);
+
+}
+
+
+/* ================= CHART ================= */
+
+function drawProgressChart(type) {
+
+    const history =
+        getProgressHistory();
+
+
+    const chart =
+        document.getElementById(
+            "progressChart"
+        );
+
+
+    chart.innerHTML = "";
+
+
+    if (history.length === 0) {
+
+        chart.innerHTML =
+            '<div class="empty-state" style="width:100%;">' +
+            'No progress data yet. Complete an analysis to start tracking.' +
+            '</div>';
+
+        return;
+
+    }
+
+
+    let groups = [];
+
+
+    if (type === "weekly") {
+
+        for (
+            let i = 6;
+            i >= 0;
+            i--
+        ) {
+
+            const date =
+                new Date();
+
+            date.setDate(
+                date.getDate() - i
+            );
+
+            groups.push({
+
+                label:
+                    date.toLocaleDateString(
+                        undefined,
+                        {
+                            weekday: "short"
+                        }
+                    ),
+
+                date:
+                    date.toLocaleDateString(),
+
+                count: 0
+
+            });
+
+        }
+
+    } else {
+
+        for (
+            let i = 29;
+            i >= 0;
+            i--
+        ) {
+
+            const date =
+                new Date();
+
+            date.setDate(
+                date.getDate() - i
+            );
+
+            groups.push({
+
+                label:
+                    date.getDate() +
+                    "/" +
+                    (date.getMonth() + 1),
+
+                date:
+                    date.toLocaleDateString(),
+
+                count: 0
+
+            });
+
+        }
+
+    }
+
+
+    history.forEach(function(item) {
+
+        const group =
+            groups.find(function(g) {
+
+                return g.date === item.date;
+
+            });
+
+
+        if (group) {
+
+            group.count++;
+
+        }
+
+    });
+
+
+    const max =
+        Math.max(
+            ...groups.map(
+                g => g.count
+            ),
+            1
+        );
+
+
+    groups.forEach(function(group) {
+
+        const column =
+            document.createElement("div");
+
+        column.className =
+            "chart-column";
+
+
+        const bar =
+            document.createElement("div");
+
+        bar.className =
+            "chart-bar";
+
+
+        const height =
+            group.count === 0
+                ? 5
+                : Math.max(
+                    10,
+                    (group.count / max) * 160
+                );
+
+
+        bar.style.height =
+            height + "px";
+
+
+        bar.title =
+            group.count +
+            " analysis session(s)";
+
+
+        const label =
+            document.createElement("div");
+
+        label.className =
+            "chart-label";
+
+        label.textContent =
+            group.label;
+
+
+        column.appendChild(bar);
+
+        column.appendChild(label);
+
+        chart.appendChild(column);
+
+    });
+
+}
+
+
+/* ================= HISTORY DISPLAY ================= */
+
+function loadHistory() {
+
+    const history =
+        getProgressHistory();
+
+
+    const container =
+        document.getElementById(
+            "historyList"
+        );
+
+
+    container.innerHTML = "";
+
+
+    if (history.length === 0) {
+
+        container.innerHTML =
+            '<div class="empty-state">' +
+            '<div style="font-size:45px;">🗂️</div>' +
+            '<h3>No history yet</h3>' +
+            '<p>Complete your first analysis and it will appear here.</p>' +
+            '</div>';
+
+        return;
+
+    }
+
+
+    const reversed =
+        [...history].reverse();
+
+
+    reversed.forEach(function(item) {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "history-card card";
+
+
+        card.innerHTML =
+
+            '<div class="history-date">' +
+            '📅 ' +
+            item.date +
+            '</div>' +
+
+            '<div class="history-info">' +
+            '🕒 ' +
+            item.time +
+            '</div>' +
+
+            '<div class="history-info">' +
+            '🎯 Goals analysed: ' +
+            item.goals +
+            '</div>';
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* ================= CLEAR HISTORY ================= */
+
+function clearHistory() {
+
+    const history =
+        getProgressHistory();
+
+
+    if (history.length === 0) {
+
+        alert(
+            "There is no history to clear."
+        );
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to clear your saved history?"
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    localStorage.removeItem(
+        getHistoryKey()
+    );
+
+
+    loadHistory();
+
+    updateProgress();
+
+
+    alert(
+        "History cleared."
+    );
+
+}
+
+
+/* ================= THEME ================= */
+
+function toggleTheme() {
+
+    document.body.classList.toggle(
+        "dark"
+    );
+
+
+    const isDark =
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    localStorage.setItem(
+        "digitalBalanceTheme",
+        isDark
+            ? "dark"
+            : "light"
+    );
+
+}
+
+
+/* ================= LOAD THEME ================= */
+
+function loadTheme() {
+
+    const savedTheme =
+        localStorage.getItem(
+            "digitalBalanceTheme"
+        );
+
+
+    if (savedTheme === "dark") {
+
+        document.body.classList.add(
+            "dark"
+        );
+
+    }
+
+}
+
+
+/* ================= LOGOUT ================= */
 
 function logout() {
 
     currentUsername = "";
 
-    document.getElementById("username").value = "";
+    selectedGoals = 0;
 
-    document.getElementById("password").value = "";
 
-    showScreen("loginScreen");
+    document.getElementById(
+        "username"
+    ).value = "";
+
+
+    document.getElementById(
+        "password"
+    ).value = "";
+
+
+    document
+        .querySelectorAll(
+            ".goal-card.selected"
+        )
+        .forEach(function(card) {
+
+            card.classList.remove(
+                "selected"
+            );
+
+        });
+
+
+    document.getElementById(
+        "goalCount"
+    ).textContent = "0";
+
+
+    showScreen(
+        "loginScreen"
+    );
 
 }
+
+
+/* ================= START ================= */
+
+loadTheme();
 
 </script>
 
